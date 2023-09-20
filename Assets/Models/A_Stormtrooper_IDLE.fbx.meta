@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: c4c97014adb1d9e4689f9192285dd1fe
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 45404ca581a915a43afcb16f98351673, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.025
+    second: {fileID: 2100000, guid: 8013fd94f5550b442b1ca2b539f41f10, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.026
+    second: {fileID: 2100000, guid: fe69c4e2ba337e04a9c04ed7421b46de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.027
+    second: {fileID: 2100000, guid: 6999dc8aa75c14e46bf9b4833ebdd55b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.028
+    second: {fileID: 2100000, guid: 0a02ed156f07f9349affee22953896ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.029
+    second: {fileID: 2100000, guid: bd725edb884967f418a94d03ef5ad046, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.030
+    second: {fileID: 2100000, guid: c6a5d84ce1ae82749ae2408f51a2276e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.031
+    second: {fileID: 2100000, guid: 4e6d6bce2477b084eb8ceecaee5d0656, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.032
+    second: {fileID: 2100000, guid: 9456b1d1c7f91604a8baa597db4576a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.033
+    second: {fileID: 2100000, guid: 78c4225a278f0c84c8599ec0d4e6fd8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.034
+    second: {fileID: 2100000, guid: e033f02506a9f1346bf304a5ed5caebb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.035
+    second: {fileID: 2100000, guid: db3febd346966724fa17e5fd661e4b2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.036
+    second: {fileID: 2100000, guid: 7d09c29b131a98d439c03e48c6dd8e68, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.037
+    second: {fileID: 2100000, guid: e6e52de50c9da7f43aec2405c09cbff6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.038
+    second: {fileID: 2100000, guid: f2d4c2829148a6f4d9bda3c3be66cc05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.039
+    second: {fileID: 2100000, guid: ac85ea36f5c478746b6300031ed80867, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: "Ko\u015Bci szturmowiec 1|Ko\u015Bci szturmowiec 1Action"
+      takeName: "Ko\u015Bci szturmowiec 1|Ko\u015Bci szturmowiec 1Action"
+      internalID: 9181153079129525189
+      firstFrame: 0
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton:
+    - name: A_Stormtrooper_IDLE(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: "Ko\u015Bci szturmowiec 1"
+      parentName: A_Stormtrooper_IDLE(Clone)
+      position: {x: -0.0005183369, y: 0.24033263, z: -0.007529694}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 21.93686, y: 21.93686, z: 21.93686}
+    - name: Body
+      parentName: "Ko\u015Bci szturmowiec 1"
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.7071068, y: 0.0000000017766503, z: -0.0000000030212124, w: 0.7071068}
+      scale: {x: 0.99999994, y: 0.99999976, z: 0.99999976}
+    - name: L Arm
+      parentName: Body
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: 0.5217177, y: -0.47729516, z: -0.52171767, w: -0.4772952}
+      scale: {x: 0.99999994, y: 1.0000002, z: 1.0000001}
+    - name: L Hand
+      parentName: L Arm
+      position: {x: -0, y: 0.0059436527, z: 2.220446e-18}
+      rotation: {x: 0.028040212, y: 0.0000000745058, z: 0.000000059604638, w: 0.99960685}
+      scale: {x: 1.0000008, y: 1.0000004, z: 1.0000004}
+    - name: L Fingers
+      parentName: L Hand
+      position: {x: 1.4901161e-10, y: 0.007472075, z: -4.4703483e-10}
+      rotation: {x: 0.00000004122108, y: 0.9999357, z: -0.011344155, w: 0.00000068619795}
+      scale: {x: 1.0000002, y: 1.0000007, z: 1.0000001}
+    - name: L Fingers_end
+      parentName: L Fingers
+      position: {x: -0, y: 0.005787251, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R Arm
+      parentName: Body
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: 0.50280106, y: 0.49718326, z: 0.50280094, w: -0.49718332}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.99999994}
+    - name: R Hand
+      parentName: R Arm
+      position: {x: 2.220446e-18, y: 0.005217134, z: -1.2572854e-10}
+      rotation: {x: -0.011387581, y: -0.00000023841847, z: -0.000000059604616, w: 0.99993515}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: R Fingers
+      parentName: R Hand
+      position: {x: 2.9802322e-10, y: 0.008107223, z: -9.685754e-10}
+      rotation: {x: 0.000000011246969, y: -0.9999479, z: 0.010206969, w: 0.0000007741615}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.9999999}
+    - name: R Fingers_end
+      parentName: R Fingers
+      position: {x: -0, y: 0.0060200426, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R Leg
+      parentName: Body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.6902979, y: 0.15326083, z: 0.69029784, w: -0.15326089}
+      scale: {x: 1.0000006, y: 1.0000004, z: 0.99999994}
+    - name: R Foot
+      parentName: R Leg
+      position: {x: -1.0658141e-16, y: 0.010803923, z: -5.960463e-10}
+      rotation: {x: 0.35722047, y: 0.40173805, z: -0.58189917, w: 0.61024046}
+      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000002}
+    - name: R Foot_end
+      parentName: R Foot
+      position: {x: -0, y: 0.0039296723, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L Leg
+      parentName: Body
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.69074863, y: -0.15121697, z: -0.6907483, w: -0.15121706}
+      scale: {x: 1.0000015, y: 1.0000008, z: 1.0000004}
+    - name: L Foot
+      parentName: L Leg
+      position: {x: 1.0658141e-16, y: 0.010797963, z: -2.9802283e-10}
+      rotation: {x: -0.36069205, y: 0.4018632, z: -0.58181274, w: -0.60819507}
+      scale: {x: 0.99999976, y: 0.9999997, z: 0.9999998}
+    - name: L Foot_end
+      parentName: L Foot
+      position: {x: -0, y: 0.0039197295, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Head
+      parentName: Body
+      position: {x: -0, y: 0.01, z: 0}
+      rotation: {x: -0.0026934147, y: -0.70710653, z: -0.0026934147, w: 0.7070969}
+      scale: {x: 0.99999976, y: 0.99999994, z: 0.9999999}
+    - name: Head_end
+      parentName: Head
+      position: {x: -0, y: 0.01543984, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Gun
+      parentName: "Ko\u015Bci szturmowiec 1"
+      position: {x: 0.012303891, y: -0.0063160933, z: 0.006478069}
+      rotation: {x: 1, y: 0.00000002208526, z: 0.0000013982536, w: 0.000000059604645}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1.0000002}
+    - name: Gun_end
+      parentName: Gun
+      position: {x: -0, y: 0.034628667, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Cylinder.014
+      parentName: A_Stormtrooper_IDLE(Clone)
+      position: {x: -0.084035404, y: 0.39563724, z: 0.12884046}
+      rotation: {x: -0.70870364, y: -0.0569655, z: -0.05550132, w: 0.70100915}
+      scale: {x: 2.0052364, y: 2.0052361, z: 3.6983209}
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
