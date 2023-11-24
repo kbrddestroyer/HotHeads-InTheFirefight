@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class InfantryBase : UnitBase, IUnit, ISelectable, IDamagable, IRagdoll
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Animator))]
+public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IRagdoll, IShooting
 {
     [SerializeField] private RagdollActivator[] ragdollActivators;
     // IRagdoll implemented
     public void Switch(bool bSwitch)
     {
+        GetComponent<Rigidbody>().isKinematic = bSwitch;
+        GetComponent<Collider>().enabled = !bSwitch;
+        GetComponent<Animator>().enabled = !bSwitch;
         foreach (RagdollActivator activator in ragdollActivators)
         {
             activator.Switch(bSwitch);

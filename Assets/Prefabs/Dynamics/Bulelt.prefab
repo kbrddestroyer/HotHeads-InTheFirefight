@@ -177,5 +177,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fSpeed: 10
-  fBaseDamage: 10
   fLifetime: 5

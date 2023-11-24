@@ -10,6 +10,8 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Collider))]
 public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 {
     /*
@@ -27,34 +29,43 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
      *  Global edit: 20.09.23 by kbrddestroyer: Watch git commit
      */
 
+    #region EDITOR_VARIABLES
+  
     [Header("Base Unit Settings")]
     [SerializeField, Range(0f, 100f)]   private float fMaxHp;
     [SerializeField, Range(0f, 100f)]   private float fFowCutoffDistance;
-    [SerializeField, Range(0f, 100f)]   private float fAttackDistance;
     [SerializeField, Range(0f, 120f)]   private float fRagdollLifetime;
-    [SerializeField, Range(0f, 10f)]    private float fShootingRate;
-    [SerializeField, Range(0f, 10f)]    private float fReloadDelay;
-    [SerializeField, Range(0f, 100f)]   private float fBaseDamage;
     [SerializeField, Range(0f, 10f)]    private float fMinUnitDistance;
-    [SerializeField, Range(0, 120)]     private int iAmmoInWeapon;
-    [Header("Required Components")]
-    [SerializeField] private Teams team;
-    [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private Transform bulletSpawnPoint;
+    [SerializeField, Range(0, 10)]    private int iWeight;
+    [Header("Team Settings")]
+    [SerializeField] protected Teams team;
+    [SerializeField] protected PlayerController parent;
     [Header("Selection Tool")]
     [SerializeField, AllowNull] protected GameObject selectIcon;
-    [SerializeField]            private bool bCanBeSelectedByOnScreenSelector;
+    [SerializeField] private bool bCanBeSelectedByOnScreenSelector;
+    [Header("GUI Tools")]
+    [SerializeField, AllowNull] private UnitLogoController unitLogo;
+    [SerializeField] private Canvas gui;
     [Header("Gizmos (Editor Only)")]
     [SerializeField] private Color cGizmoColorFOW;
-    [SerializeField] private Color cGizmoColorAttackDistance;
 
-    private int iCurrentMagAmmo = 0;
-    private int iAmmoTotal = 0;
-    private float attackTimeDelay = 0f;
-    private bool bMouseOver = false;
+    #endregion
+
+    #region PROTECTED
+    protected float   fHp;
+    protected bool    bMouseOver = false;
+    protected bool    bSelected = false;
+
+    // Components
+    protected Collider col;
+    protected NavMeshAgent agent;
+    protected Camera mainCamera;
+    protected Animator animator;
+    protected UnitLogoController unitLogoController;
+    #endregion
+
+    #region GETTER_SETTER
     public Teams Team { get => team; }
-
-    [SerializeField] private float fHp;
 
     public float HP { 
         get => fHp; 
@@ -65,7 +76,6 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         } 
     }
 
-    protected bool bSelected;
     public bool Selected { 
         get => bSelected; 
         set => bSelected = value; 
@@ -73,33 +83,71 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     public Vector3 WorldPosition { get => transform.position; }
 
-    // Components
-    protected Rigidbody rb;
-    protected Collider col;
-    protected NavMeshAgent agent;
-    protected Camera mainCamera;
-    protected Animator animator;
+    public PlayerController Parent
+    {
+        get => parent;
+        set
+        {
+            parent = value;
+        }
+    }
+
+    public int Weight
+    {
+        get => iWeight;
+    }
+
+    public UnitLogoController UnitLogoController
+    {
+        get => unitLogoController;
+        set => unitLogoController = value;
+    }
+
+    #endregion
+
+    #region INTERFACES
+
+    #region ISELECTABLE_IMPLEMENTED
+
+    // ISelectable interface is used for on-screen selection
 
     public virtual void Register()
     {
+        // Register function should be called on Awake/Start method
+        // It's used for object registration in selectable objects list
+        // on Selection.cs
+
+        // Sometimes object cannot be selected
+        // e.g. enemy unit cannot be selected by the player
+
         if (bCanBeSelectedByOnScreenSelector)
             Selection.RegisterNewSelectable(this);
     }
 
     public virtual void ToggleSelection(bool state)
     {
+        // Toggle selection method is called in Selection.cs when selection box overlaps this object root point
+
         bSelected = state;
         selectIcon.SetActive(state);
     }
+    #endregion
+
+    #region IUNIT_IMPLEMENTED
 
     // IUnit implemented
-    public abstract void OnDeath();
+    public abstract void OnDeath(); // OnDeath method is called when HP is less or eq. 0 OR when this script is being disabled
+
+    #endregion
+    #endregion
+
+    #region LIFECYCLE
 
     // MonoBehaviour lifecycle
+    // Any of lifecycle methods can be overwritten
 
     protected virtual void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -110,90 +158,27 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         if (agent == null)
             Debug.LogWarning($"Warning! {name} unit has no NavMesh agent!");
 
-        iCurrentMagAmmo = iAmmoInWeapon;
-        iAmmoTotal = iAmmoInWeapon * 2;
-    }
-
-    protected virtual void Attack(Transform target)
-    {
-        attackTimeDelay += Time.deltaTime;
-
-        transform.LookAt(target.position + Vector3.up * 0.5f);
-
-        if (attackTimeDelay >= fShootingRate)
+        if (unitLogo != null)
         {
-            attackTimeDelay = 0;
-            iCurrentMagAmmo--;
-            Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation).GetComponent<Bullet>().BaseDamage = fBaseDamage;
-        }
-        
-    }
-
-    protected virtual void ShootingBase()
-    {
-        if (iCurrentMagAmmo > 0)
-        {
-            LayerMask mask = LayerMask.GetMask("Unit");
-            Collider[] colliders = Physics.OverlapSphere(transform.position, fAttackDistance, mask);
-
-            if (colliders.Length == 0) return;
-            Transform closestEnemy = null;
-
-            foreach (Collider _collider in colliders)
-            {
-                UnitBase unitBase = _collider.GetComponent<UnitBase>();
-                if (unitBase != null && unitBase.team != this.team)
-                {
-                    if (
-                        closestEnemy == null ||
-                        Vector3.Distance(transform.position, _collider.transform.position) < Vector3.Distance(transform.position, closestEnemy.position)
-                        )
-                    {
-                        closestEnemy = _collider.transform;
-                    }
-                }
-            }
-            if (animator != null) animator.SetBool("shooting", (closestEnemy != null));
-            if (closestEnemy != null)
-            {
-                Attack(closestEnemy);
-            }
-        }
-        else if (iAmmoTotal > 0)
-        {
-            animator.SetBool("reload", true);
-            attackTimeDelay += Time.deltaTime;
-            if (attackTimeDelay >= fReloadDelay)
-            {
-                // Reload
-
-                attackTimeDelay = 0;
-
-                iCurrentMagAmmo = Mathf.Clamp(iAmmoTotal, 0, iAmmoInWeapon);
-                Debug.Log("Reloaded!");
-                iAmmoTotal -= iCurrentMagAmmo;
-                animator.SetBool("reload", false);
-            }
-        }
-        else
-        {
-            animator.SetBool("shooting", false);
+            unitLogoController = Instantiate(unitLogo.gameObject, gui.transform).GetComponent<UnitLogoController>();
+            unitLogoController.ControllerObject = this;
         }
     }
 
-    private void OnMouseEnter()
+
+    protected virtual void OnMouseEnter()
     {
         bMouseOver = true;
     }
 
-    private void OnMouseExit()
+    protected virtual void OnMouseExit()
     {
         bMouseOver = false;
     }
 
     protected virtual void Update()
     {
-        if (bCanBeSelectedByOnScreenSelector)
+        if (bCanBeSelectedByOnScreenSelector && parent != null && !parent.AIControlled)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -217,8 +202,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
                     }
                 }
             }
-            ShootingBase();
-            if (agent != null) animator.SetFloat("speed", agent.velocity.magnitude);
+            if (agent != null && animator != null) animator.SetFloat("speed", agent.velocity.magnitude);
         }
     }
 
@@ -239,7 +223,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
             if (agent)
             {
                 if (direction != Vector3.zero) agent.ResetPath();
-                animator.SetFloat("speed", direction.normalized.magnitude * agent.speed);
+                if (animator) animator.SetFloat("speed", direction.normalized.magnitude * agent.speed);
                 transform.position += direction.normalized * agent.speed * Time.deltaTime;
             }
         }
@@ -248,20 +232,20 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     protected virtual void OnDisable()
     {
         OnDeath();
+        Destroy(unitLogoController.gameObject);
         Destroy(this.gameObject, fRagdollLifetime);
     }
+    #endregion
 
-    // Editor GUI
-
+    #region UNITY_EDITOR
 #if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = cGizmoColorFOW;
 
         Gizmos.DrawWireSphere(transform.position, fFowCutoffDistance);
-        Gizmos.color = cGizmoColorAttackDistance;
-        Gizmos.DrawWireSphere(transform.position, fAttackDistance);
         Gizmos.DrawWireSphere(transform.position, fMinUnitDistance);
     }
 #endif
+    #endregion
 }

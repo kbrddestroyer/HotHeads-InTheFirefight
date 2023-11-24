@@ -15,7 +15,6 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IDamagable damagable = other.GetComponent<IDamagable>();
-        Debug.Log(damagable);
         if (damagable != null)
         {
             damagable.HP -= fBaseDamage;

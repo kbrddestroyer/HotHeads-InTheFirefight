@@ -47,7 +47,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 82f0584e9eaae514b9be4e465900345a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 15b4f9b205686124ba6dcff2e3e94721, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -14814,7 +14814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7136655058632248496, guid: f90e987d0b2c2ac47b208dec3af944c4, type: 3}
       propertyPath: speed
-      value: 2.8
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f90e987d0b2c2ac47b208dec3af944c4, type: 3}

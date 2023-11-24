@@ -147,6 +147,6 @@ MonoBehaviour:
   pointsCount: 36
   maxRadius: 3
   startWidth: 1
-  speed: 15
+  speed: 50
   force: 10
   maxDamage: 10

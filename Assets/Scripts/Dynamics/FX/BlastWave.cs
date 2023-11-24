@@ -26,12 +26,18 @@ public class BlastWave : MonoBehaviour
     [SerializeField, Range(0f, 10f)]  private float force;            // Applies to rigidbodies
     [SerializeField, Range(0f, 100f)] private float maxDamage;        // Damage in center. Recalculated on distance
     // -----                    PRIVATE                         ----- //
-    private LineRenderer lineRenderer;                                  
+    private LineRenderer lineRenderer;
+    private static LayerMask unitLayer;
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, maxRadius);
+    }
+
+    private void OnValidate()
+    {
+        unitLayer = LayerMask.GetMask("Unit");
     }
 
     private void Awake()
@@ -55,13 +61,15 @@ public class BlastWave : MonoBehaviour
 
     private void DealDamage(float radius)
     {
-        Collider[] hitting = Physics.OverlapSphere(transform.position, radius);
+        Collider[] hitting = Physics.OverlapSphere(transform.position, radius, unitLayer);
 
         foreach (Collider collider in hitting)
         {
             Rigidbody rb = collider.GetComponent<Rigidbody>();
-
+            UnitBase unitBase = collider.GetComponent<UnitBase>();
             float damage = (maxRadius - radius) * maxDamage;
+            if (unitBase != null)
+                unitBase.HP -= damage;
             if (rb)
             {
                 Vector3 direction = (collider.transform.position - transform.position).normalized;

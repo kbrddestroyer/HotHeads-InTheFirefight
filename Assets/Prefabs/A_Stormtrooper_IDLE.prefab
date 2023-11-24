@@ -1589,8 +1589,10 @@ GameObject:
   - component: {fileID: 7876920725628875585}
   - component: {fileID: 7622254825458093088}
   - component: {fileID: 2377591240777693333}
-  - component: {fileID: 4936760076714445233}
   - component: {fileID: 5378460418780771582}
+  - component: {fileID: 1051467268177557131}
+  - component: {fileID: 4936760076714445233}
+  - component: {fileID: 8639421719782175403}
   m_Layer: 7
   m_Name: A_Stormtrooper_IDLE
   m_TagString: Untagged
@@ -1648,9 +1650,67 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.2
-  m_Height: 1
+  m_Height: 0.87133306
   m_Direction: 1
-  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Center: {x: 0, y: 0.4364908, z: 0}
+--- !u!114 &5378460418780771582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357651463745907195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bacb8f051975bf0478f7588322c4c60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fMaxHp: 10
+  fFowCutoffDistance: 4
+  fRagdollLifetime: 5
+  fMinUnitDistance: 0.5
+  team: 0
+  selectIcon: {fileID: 282159862979398127}
+  bCanBeSelectedByOnScreenSelector: 1
+  cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
+  fShootingRate: 0.1
+  fReloadDelay: 3
+  fBaseDamage: 1.5
+  iAmmoInWeapon: 15
+  fAttackDistance: 3
+  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
+  bulletSpawnPoint: {fileID: 6719234644432676963}
+  cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 1}
+  iAmmoTotal: 0
+  ragdollActivators:
+  - {fileID: 7492528139264967493}
+  - {fileID: 4015314490939768752}
+  - {fileID: 6075103340773531754}
+  - {fileID: 7297673574580778132}
+  - {fileID: 2816309834458412391}
+  - {fileID: 3249686388562584942}
+  - {fileID: 1079109594062661312}
+  - {fileID: 4578978209124308065}
+  - {fileID: 8467177259448379533}
+  - {fileID: 6820371265517628654}
+  - {fileID: 5452787361283117839}
+  - {fileID: 7050318438394040651}
+--- !u!54 &1051467268177557131
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357651463745907195}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!195 &4936760076714445233
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1673,48 +1733,102 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5378460418780771582
-MonoBehaviour:
+--- !u!82 &8639421719782175403
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7357651463745907195}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bacb8f051975bf0478f7588322c4c60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fMaxHp: 10
-  fFowCutoffDistance: 4
-  fAttackDistance: 3
-  fRagdollLifetime: 5
-  fShootingRate: 0.1
-  fReloadDelay: 3
-  fBaseDamage: 1.5
-  fMinUnitDistance: 0.5
-  iAmmoInWeapon: 15
-  bCanBeSelectedByOnScreenSelector: 1
-  team: 0
-  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
-  bulletSpawnPoint: {fileID: 6719234644432676963}
-  selectIcon: {fileID: 282159862979398127}
-  cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
-  cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 1}
-  fHp: 0
-  ragdollActivators:
-  - {fileID: 7492528139264967493}
-  - {fileID: 4015314490939768752}
-  - {fileID: 6075103340773531754}
-  - {fileID: 7297673574580778132}
-  - {fileID: 2816309834458412391}
-  - {fileID: 3249686388562584942}
-  - {fileID: 1079109594062661312}
-  - {fileID: 4578978209124308065}
-  - {fileID: 8467177259448379533}
-  - {fileID: 6820371265517628654}
-  - {fileID: 5452787361283117839}
-  - {fileID: 7050318438394040651}
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e4fd8db142e0f074daee1587278e1a9d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.7
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 50
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7368954468816463436
 GameObject:
   m_ObjectHideFlags: 0
