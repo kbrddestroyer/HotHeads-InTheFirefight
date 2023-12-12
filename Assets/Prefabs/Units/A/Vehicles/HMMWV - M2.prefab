@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912032013090367593}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.74, y: 1.793, z: 8.64}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -75,7 +75,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 912032013090367593}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: -334000983
   m_Radius: 1
   m_Speed: 3.5
   m_Acceleration: 8
@@ -86,7 +86,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1.2
-  m_BaseOffset: 0.55
+  m_BaseOffset: 0.57
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!120 &4742437029010055853
@@ -204,10 +204,16 @@ MonoBehaviour:
   fFowCutoffDistance: 7
   fRagdollLifetime: 0
   fMinUnitDistance: 0
+  iWeight: 0
   team: 0
+  parent: {fileID: 0}
   selectIcon: {fileID: 4928929229104483867}
   bCanBeSelectedByOnScreenSelector: 1
+  unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
+  gui: {fileID: 0}
+  unitName: HMMVW SPL
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
+  fHp: 0
   supplyDelay: 1
   supplyRange: 6.5
   supplyAmount: 3

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Destruction : MonoBehaviour
 {
+    private RagdollActivator[] activators;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -22,4 +24,11 @@ public class Destruction : MonoBehaviour
             }
         }
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        
+    }
+#endif
 }

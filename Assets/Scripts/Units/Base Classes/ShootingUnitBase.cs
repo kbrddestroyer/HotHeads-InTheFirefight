@@ -36,6 +36,8 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
     public virtual void Attack(Transform target)
     {
         if (agent.velocity.magnitude != 0) { return; }
+        if (animator != null && animator.GetBool("shooting") != true)
+            animator.SetBool("shooting", true);
         fTimePassed += Time.deltaTime;
 
         transform.LookAt(target.position + Vector3.up * 0.5f);
@@ -45,7 +47,9 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
             source.Play();
             fTimePassed = 0;
             iCurrentMagAmmo--;
-            Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation).GetComponent<Bullet>().BaseDamage = fBaseDamage;
+            Bullet _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            _bullet.GetComponent<Bullet>().BaseDamage = fBaseDamage;
+            _bullet.transform.LookAt(target.position + Vector3.up * 0.5f);
         }
     }
 
@@ -54,10 +58,15 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
         if (iCurrentMagAmmo > 0)
         {
             Transform closestEnemy = FindClosest();
-            if (animator != null && animator.GetBool("shooting") != (closestEnemy != null)) animator.SetBool("shooting", (closestEnemy != null));
+
             if (closestEnemy != null)
             {
                 Attack(closestEnemy);
+            }
+            else
+            {
+                if (animator != null && animator.GetBool("shooting") != false)
+                    animator.SetBool("shooting", false);
             }
         }
         else if (iAmmoTotal > 0)
@@ -71,7 +80,6 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
                 fTimePassed = 0;
 
                 iCurrentMagAmmo = Mathf.Clamp(iAmmoTotal, 0, iAmmoInWeapon);
-                Debug.Log("Reloaded!");
                 iAmmoTotal -= iCurrentMagAmmo;
                 if (animator) animator.SetBool("reload", false);
             }

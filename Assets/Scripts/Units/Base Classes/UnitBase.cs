@@ -1,14 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Collider))]
@@ -40,19 +34,21 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [Header("Team Settings")]
     [SerializeField] protected Teams team;
     [SerializeField] protected PlayerController parent;
+    [SerializeField] protected GameObject mesh;
     [Header("Selection Tool")]
     [SerializeField, AllowNull] protected GameObject selectIcon;
     [SerializeField] private bool bCanBeSelectedByOnScreenSelector;
     [Header("GUI Tools")]
     [SerializeField, AllowNull] private UnitLogoController unitLogo;
     [SerializeField] private Canvas gui;
+    [SerializeField] private string unitName;
     [Header("Gizmos (Editor Only)")]
     [SerializeField] private Color cGizmoColorFOW;
 
     #endregion
 
     #region PROTECTED
-    protected float   fHp;
+    [SerializeField] protected float   fHp;
     protected bool    bMouseOver = false;
     protected bool    bSelected = false;
 
@@ -103,6 +99,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         set => unitLogoController = value;
     }
 
+    public string UnitName { get => unitName; }
     #endregion
 
     #region INTERFACES
@@ -146,12 +143,19 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     // MonoBehaviour lifecycle
     // Any of lifecycle methods can be overwritten
 
+    protected virtual void ToggleFOW(bool state)
+    {
+        mesh.SetActive(state);
+        unitLogoController.gameObject.SetActive(state);
+    }
+
     protected virtual void Awake()
     {
         col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         mainCamera = Camera.main;
+        gui = FindObjectOfType<CameraController>().MainCanvas;
         fHp = fMaxHp;
         Register();
 
@@ -162,6 +166,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         {
             unitLogoController = Instantiate(unitLogo.gameObject, gui.transform).GetComponent<UnitLogoController>();
             unitLogoController.ControllerObject = this;
+            unitLogoController.setName(unitName);
         }
     }
 
@@ -202,8 +207,24 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
                     }
                 }
             }
-            if (agent != null && animator != null) animator.SetFloat("speed", agent.velocity.magnitude);
         }
+        if (parent.AIControlled)
+        {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, fFowCutoffDistance, LayerMask.GetMask("Unit"));
+            bool _enable = false;
+            
+            foreach (Collider col in colliders)
+            {
+                UnitBase baseUnitController = col.GetComponent<UnitBase>();
+                if (baseUnitController && parent.Team != baseUnitController.Team)
+                {
+                    _enable = true;
+                    break;
+                }
+            }
+            ToggleFOW(_enable);
+        }
+        if (agent != null && animator != null) animator.SetFloat("speed", agent.velocity.magnitude);
     }
 
     private void LateUpdate()
@@ -231,8 +252,13 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     protected virtual void OnDisable()
     {
+        mesh.SetActive(true);
         OnDeath();
-        Destroy(unitLogoController.gameObject);
+        if (unitLogoController) Destroy(unitLogoController.gameObject);
+        if (GetComponent<AIUnitController>()) Destroy(GetComponent<AIUnitController>());
+        Selection.RemoveSelectable(this);
+        agent.isStopped = true;
+        
         Destroy(this.gameObject, fRagdollLifetime);
     }
     #endregion

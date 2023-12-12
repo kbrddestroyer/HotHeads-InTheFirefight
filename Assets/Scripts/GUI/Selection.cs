@@ -12,13 +12,20 @@ public class Selection : MonoBehaviour
 
     private Camera mainCamera;
     private bool isSelection = false;
+    private bool selectionEnabled = true;
     private Vector2 startPos, endPos;
 
-    [SerializeField] private static List<ISelectable> selectables = new List<ISelectable>();
+    private static List<ISelectable> selectables = new List<ISelectable>();
     public static void RegisterNewSelectable(ISelectable selectable)
     {
         if (!selectables.Contains(selectable))
             selectables.Add(selectable);
+    }
+
+    public static void RemoveSelectable(ISelectable selectable)
+    {
+        if (selectables.Contains(selectable))
+            selectables.Remove(selectable);
     }
 
     // Start is called before the first frame update
@@ -30,26 +37,31 @@ public class Selection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Input.mousePosition;
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (selectionEnabled)
         {
-            startPos = mousePos;
-         }
-        if (Input.GetKey(KeyCode.Mouse0))
-        {
-            if (
-                Vector2.Distance(mousePos, startPos) > delta
-                )
+            Vector2 mousePos = Input.mousePosition;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                isSelection = true;
-                UpdateSelectionBox(mousePos);
+                startPos = mousePos;
+            }
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                if (
+                    Vector2.Distance(mousePos, startPos) > delta
+                    )
+                {
+                    isSelection = true;
+                    UpdateSelectionBox(mousePos);
+                }
+            }
+            if (Input.GetKeyUp(KeyCode.Mouse0) && isSelection)
+            {
+                ReleaseSelectionBox();
+                isSelection = false;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0) && isSelection)
-        {
-            ReleaseSelectionBox();
-            isSelection = false;
-        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) selectionEnabled = !selectionEnabled;
     }
 
     private void UpdateSelectionBox(Vector2 curMousePos)

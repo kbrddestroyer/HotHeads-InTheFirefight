@@ -22,10 +22,13 @@ public class CameraController : MonoBehaviour
     [SerializeField, Range(-25f, 25f)] private float maxDistance;
     [SerializeField] private Transform mainCamera;
     [SerializeField] private Transform cameraRotationManager;
+    [SerializeField] private Canvas mainCanvas;
     [Header("Editor only")]
     [SerializeField] private Color gizmoColor;
 
     private Quaternion initialRotation;
+
+    public Canvas MainCanvas { get { return mainCanvas; } }
 
     private void Awake()
     {
@@ -53,7 +56,6 @@ public class CameraController : MonoBehaviour
             float mouseAxisX = Input.GetAxis("Mouse X");
             float mouseAxisY = Input.GetAxis("Mouse Y") * -1;
             Vector3 rotationEulers = cameraRotationManager.transform.rotation.eulerAngles + new Vector3(mouseAxisY, mouseAxisX, 0) * 10;
-            Debug.Log(rotationEulers);
             rotationEulers.x = Mathf.Clamp(rotationEulers.x, 0f, 90f);
 
             cameraRotationManager.transform.rotation = Quaternion.Euler(new Vector3(rotationEulers.x, cameraRotationManager.transform.rotation.eulerAngles.y, cameraRotationManager.transform.rotation.eulerAngles.z));

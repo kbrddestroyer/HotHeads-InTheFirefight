@@ -63,8 +63,8 @@ public class AIUnitController : MonoBehaviour
                 if (poi.Weight * teamID < optimal.Weight * teamID)
                     optimal = poi;
             }
-        }
 
-        agent.destination = optimal.transform.position;
+            agent.destination = optimal.transform.position;
+        }
     }
 }

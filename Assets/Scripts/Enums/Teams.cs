@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum Teams
 {
-    TEAM_A, TEAM_B
+    TEAM_A, TEAM_B, NONE
 }

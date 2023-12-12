@@ -1627,7 +1627,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7357651463745907195}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: c4c97014adb1d9e4689f9192285dd1fe, type: 3}
   m_Controller: {fileID: 9100000, guid: 9c95dc1d0344ac4499d5dfd29e4f94c8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -1669,10 +1669,17 @@ MonoBehaviour:
   fFowCutoffDistance: 4
   fRagdollLifetime: 5
   fMinUnitDistance: 0.5
+  iWeight: 0
   team: 0
+  parent: {fileID: 0}
+  mesh: {fileID: 5811753529965885131}
   selectIcon: {fileID: 282159862979398127}
   bCanBeSelectedByOnScreenSelector: 1
+  unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
+  gui: {fileID: 0}
+  unitName: Rifler
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
+  fHp: 0
   fShootingRate: 0.1
   fReloadDelay: 3
   fBaseDamage: 1.5
@@ -1742,7 +1749,7 @@ AudioSource:
   m_GameObject: {fileID: 7357651463745907195}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2510767092655000205, guid: 15a1a0d6624afe74c93d9e2aa6fb8e15, type: 2}
   m_audioClip: {fileID: 8300000, guid: e4fd8db142e0f074daee1587278e1a9d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.7

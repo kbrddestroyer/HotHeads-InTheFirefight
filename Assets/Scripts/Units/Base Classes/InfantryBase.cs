@@ -5,7 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
-[RequireComponent(typeof(Animator))]
 public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IRagdoll, IShooting
 {
     [SerializeField] private RagdollActivator[] ragdollActivators;
@@ -14,7 +13,7 @@ public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IR
     {
         GetComponent<Rigidbody>().isKinematic = bSwitch;
         GetComponent<Collider>().enabled = !bSwitch;
-        GetComponent<Animator>().enabled = !bSwitch;
+        if (GetComponent<Animator>()) GetComponent<Animator>().enabled = !bSwitch;
         foreach (RagdollActivator activator in ragdollActivators)
         {
             activator.Switch(bSwitch);
@@ -25,7 +24,6 @@ public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IR
     public override void OnDeath()
     {
         Switch(true);
-        Destroy(this);
     }
 
     protected override void Awake()

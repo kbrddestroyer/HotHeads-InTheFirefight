@@ -1,65 +1,84 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Unit info")]
+    [SerializeField] private GlobalUnitList allUnits;
     [SerializeField] private Teams team;
     [SerializeField] private bool isControllerByAI;
     [SerializeField, Range(0f, 10f)] private float deltaTime;
     [SerializeField] private GameObject explosion;
 
+    [SerializeField, AllowNull] private TMP_Dropdown menu;
+
     private float timePassed;
     private LayerMask ground;
+
+    private List<UnitStructureInformation> units;
+
+    public Teams Team { get => team; }
 
     public bool AIControlled
     {
         get => isControllerByAI;
     }
 
-    [System.Serializable]
-    public class Resource
+    [SerializeField] private GameResourceStructure[] resourcesCount;
+
+    public void addResourceAppliance(GameResources resource, float appliance)
     {
-        [SerializeField] private Resources type;
-        [SerializeField] private float amount;
-        [SerializeField, Range(0f, 10f)] public float baseAppliance;
-
-        private float appliance;
-
-        [SerializeField, AllowNull] private TMP_Text label;
-        [SerializeField, AllowNull] private TMP_Text applianceLabel;
-
-        public Resources Type { get => type; } 
-
-        public float Amount { get => amount; 
-            set
-            {
-                amount = value;
-                if (label != null)
-                    label.text = amount.ToString();
-            }
-        }
-
-        public float Appliance
+        foreach (GameResourceStructure res in resourcesCount)
         {
-            get => appliance;
-            set
+            if (res.Type == resource)
             {
-                appliance = value;
-                if (applianceLabel != null)
-                    applianceLabel.text = appliance.ToString();
+                res.Appliance += appliance;
+                break;
             }
         }
     }
 
-    [SerializeField] private Resource[] resourcesCount;
+    public GameResourceStructure getResource(GameResources resource)
+    {
+        foreach (GameResourceStructure _resource in resourcesCount)
+        {
+            if (_resource.Type == resource)
+            {
+                return _resource;
+            }
+        }
+        return null;
+    }
+
+    public void SpawnUnitFromDropdown()
+    {
+        UnitBase unit = menu.options[menu.value].ConvertTo<UnitStructureInformation>().unit;
+        SpawnSelectedUnit(unit);
+    }
+
+    private void SpawnSelectedUnit(UnitBase unitPrefab)
+    {
+        unitPrefab.Parent = this;
+        UnitBase unit = Instantiate(unitPrefab, transform.position, transform.rotation);
+        unit.Parent = this;
+    }
 
     public void Awake()
     {
-        foreach (Resource _res in resourcesCount)
+        units = allUnits.Units.ToList<UnitStructureInformation>();
+        units.RemoveAll(u => u.team != Team);
+        if (menu)
+        {
+            menu.options.Clear();
+            menu.options.AddRange(units);
+        }
+        foreach (GameResourceStructure _res in resourcesCount)
         {
             _res.Appliance = _res.baseAppliance;
         }
@@ -74,7 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             timePassed = 0f;
 
-            foreach (Resource _res in resourcesCount)
+            foreach (GameResourceStructure _res in resourcesCount)
             {
                 _res.Amount += _res.Appliance;
             }
@@ -82,7 +101,12 @@ public class PlayerController : MonoBehaviour
 
         if (isControllerByAI)
         {
-
+            GameResourceStructure manpwr = getResource(GameResources.MANPOWER);
+            if (manpwr.Amount >= 30)
+            {
+                SpawnSelectedUnit(units[0].unit);
+                manpwr.Amount -= 30;
+            }
         }
         else
         {
@@ -94,6 +118,10 @@ public class PlayerController : MonoBehaviour
                 {
                     Instantiate(explosion, hit.point, Quaternion.identity);
                 }
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                UnitLogoController.Enabled = !UnitLogoController.Enabled;
             }
         }
     }
