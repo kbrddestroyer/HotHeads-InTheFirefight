@@ -25,10 +25,12 @@ public class PointOfInterest : MonoBehaviour
 
     private List<UnitBase> units = new List<UnitBase>();
     private POILogoController attachedLogo;
-    private int weight;
+    [SerializeField] private int weight;
 
     private List<PlayerController> A_sidePlayers;
     private List<PlayerController> B_sidePlayers;
+
+    public string Name { get => poiName; }
 
     public Teams ControlTeam
     {
@@ -109,7 +111,7 @@ public class PointOfInterest : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(transform.position, distance, mask);
 
             float _status = 0.0f;
-
+            weight = 0;
             foreach (Collider col in colliders)
             {
                 UnitBase _base = col.GetComponent<UnitBase>();

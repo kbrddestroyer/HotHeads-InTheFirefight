@@ -60,7 +60,8 @@ public class AIUnitController : MonoBehaviour
         {
             foreach (PointOfInterest poi in poiList)
             {
-                if (poi.Weight * teamID < optimal.Weight * teamID)
+                Debug.Log($"{poi.Name} - {poi.Weight}");
+                if (poi.Weight * teamID < optimal.Weight * teamID && poi.Weight >= 0)
                     optimal = poi;
             }
 

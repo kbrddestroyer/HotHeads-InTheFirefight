@@ -207,6 +207,7 @@ MonoBehaviour:
   iWeight: 0
   team: 0
   parent: {fileID: 0}
+  mesh: {fileID: 6407382745027717284}
   selectIcon: {fileID: 4928929229104483867}
   bCanBeSelectedByOnScreenSelector: 1
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
@@ -871,7 +872,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
 --- !u!1 &8173673828232404125
 GameObject:
   m_ObjectHideFlags: 0

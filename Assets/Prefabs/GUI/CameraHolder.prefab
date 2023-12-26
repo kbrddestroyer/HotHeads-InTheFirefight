@@ -260,10 +260,12 @@ MonoBehaviour:
   speed: 10
   smoothness: 250
   mouseWheelSens: 2
+  mouseSens: 10
   minDistance: -15
   maxDistance: 0
   mainCamera: {fileID: 6094882423089436151}
   cameraRotationManager: {fileID: 6094882424589634088}
+  mainCanvas: {fileID: 0}
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &6094882424589634089
 GameObject:
