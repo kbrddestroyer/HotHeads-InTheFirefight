@@ -8,4 +8,9 @@ public class UnitStructureInformation : TMP_Dropdown.OptionData
 {
     public UnitBase unit;
     public Teams team;
+
+    public void OnValidate()
+    {
+        text = unit.name;
+    }
 }
