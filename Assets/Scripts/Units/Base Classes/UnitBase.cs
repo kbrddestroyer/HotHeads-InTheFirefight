@@ -1,11 +1,15 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
+[SelectionBase]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Collider))]
+
+[Title("UnitBase Class Settings", "Settings for Unit basics, such as HP, speed, etc.", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
 public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 {
     /*
@@ -21,43 +25,46 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
      *  
      *  Modifies:
      *  Global edit: 20.09.23 by kbrddestroyer: Watch git commit
+     *  
+     *  REVIEW THIS PLS
      */
 
     #region EDITOR_VARIABLES
-  
     [Header("Base Unit Settings")]
-    [SerializeField, Range(0f, 100f)]   private float fMaxHp;
-    [SerializeField, Range(0f, 100f)]   private float fFowCutoffDistance;
-    [SerializeField, Range(0f, 120f)]   private float fRagdollLifetime;
-    [SerializeField, Range(0f, 10f)]    private float fMinUnitDistance;
-    [SerializeField, Range(0, 10)]    private int iWeight;
+    [SerializeField, Range(0f, 100f), LabelText("HP Maximum value")]   private float fMaxHp;
+    [SerializeField, Range(0f, 100f), LabelText("FOW Cutoff Distance")]   private float fFowCutoffDistance;
+    [SerializeField, Range(0f, 120f), LabelText("Ragdoll lifetime (sec.)")]   private float fRagdollLifetime;
+    [Tooltip("Units are using NavMeshAgent and sometimes stuck walking in each other. This parameter always keeps some space between them to prevent this")]
+    [SerializeField, Range(0f, 10f), LabelText("Unit Spacing")] private float fMinUnitDistance;
+    [SerializeField, Range(0, 10), LabelText("AI Weight")]    private int iWeight;
     [Header("Team Settings")]
     [SerializeField] protected Teams team;
-    [SerializeField] protected PlayerController parent;
-    [SerializeField] protected GameObject mesh;
+    [SerializeField, SceneObjectsOnly] protected PlayerController parent;
     [Header("Selection Tool")]
-    [SerializeField, AllowNull] protected GameObject selectIcon;
-    [SerializeField] private bool bCanBeSelectedByOnScreenSelector;
+    [SerializeField, ChildGameObjectsOnly, AllowNull] protected GameObject selectIcon;
+    [InfoBox("Replace this with something. This is incorrect way", InfoMessageType = InfoMessageType.Warning)]
+    [SerializeField, LabelText("Can be selected in-game?")] private bool bCanBeSelectedByOnScreenSelector;  // parent.hasAuthority
     [Header("GUI Tools")]
     [SerializeField, AllowNull] private UnitLogoController unitLogo;
     [SerializeField] private Canvas gui;
     [SerializeField] private string unitName;
     [Header("Gizmos (Editor Only)")]
-    [SerializeField] private Color cGizmoColorFOW;
-
+    [SerializeField, ColorPalette] private Color cGizmoColorFOW;
     #endregion
 
     #region PROTECTED
-    [SerializeField] protected float   fHp;
+    // Components
+    [Header("Requirements (Fill with button below)")]
+    [SerializeField, LabelText("Collider reference")] protected Collider col;
+    [SerializeField, LabelText("NavMesh reference")] protected NavMeshAgent agent;
+    [SerializeField, LabelText("Main Camera")] protected Camera mainCamera;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected UnitLogoController unitLogoController;
+    [SerializeField, ChildGameObjectsOnly] protected GameObject mesh;
+
+    protected float   fHp;
     protected bool    bMouseOver = false;
     protected bool    bSelected = false;
-
-    // Components
-    protected Collider col;
-    protected NavMeshAgent agent;
-    protected Camera mainCamera;
-    protected Animator animator;
-    protected UnitLogoController unitLogoController;
     #endregion
 
     #region GETTER_SETTER
@@ -151,11 +158,6 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     protected virtual void Awake()
     {
-        col = GetComponent<Collider>();
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        mainCamera = Camera.main;
-        gui = FindObjectOfType<CameraController>().MainCanvas;
         fHp = fMaxHp;
         Register();
 
@@ -271,6 +273,16 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
         Gizmos.DrawWireSphere(transform.position, fFowCutoffDistance);
         Gizmos.DrawWireSphere(transform.position, fMinUnitDistance);
+    }
+
+    [Button("Fill")]
+    private void FillRequired()
+    {
+        col = GetComponent<Collider>();
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        mainCamera = Camera.main;
+        gui = FindObjectOfType<CameraController>().MainCanvas;
     }
 #endif
     #endregion

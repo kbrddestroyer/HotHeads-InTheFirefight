@@ -1669,7 +1669,7 @@ MonoBehaviour:
   fFowCutoffDistance: 4
   fRagdollLifetime: 5
   fMinUnitDistance: 0.5
-  iWeight: 0
+  iWeight: 1
   team: 0
   parent: {fileID: 0}
   mesh: {fileID: 5811753529965885131}
@@ -1680,6 +1680,11 @@ MonoBehaviour:
   unitName: Rifler
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
   fHp: 0
+  col: {fileID: 2377591240777693333}
+  agent: {fileID: 4936760076714445233}
+  mainCamera: {fileID: 0}
+  animator: {fileID: 7622254825458093088}
+  unitLogoController: {fileID: 0}
   fShootingRate: 0.1
   fReloadDelay: 3
   fBaseDamage: 1.5

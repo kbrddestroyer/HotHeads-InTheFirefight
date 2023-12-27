@@ -9,8 +9,9 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Unit info")]
+    [Header("Global Unit List Scriptable Object")]
     [SerializeField] private GlobalUnitList allUnits;
+    [Header("Unit info")]
     [SerializeField] private Teams team;
     [SerializeField] private bool isControllerByAI;
     [SerializeField, Range(0f, 10f)] private float deltaTime;
@@ -72,7 +73,11 @@ public class PlayerController : MonoBehaviour
     public void Awake()
     {
         units = allUnits.Units.ToList<UnitStructureInformation>();
-        units.RemoveAll(u => u.team != Team);
+        units.RemoveAll(u => u.team != Team);      
+
+        // WARNING
+        // Replace this with something more...optimised I guess 
+
         if (menu)
         {
             menu.options.Clear();

@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IRagdoll, IShooting
 {
+    [Space]
+    [Title("InfantryBase Class Settings", "Settings for Infantry specific settings", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
     [SerializeField] private RagdollActivator[] ragdollActivators;
     // IRagdoll implemented
     public void Switch(bool bSwitch)
@@ -37,7 +40,8 @@ public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IR
     }
 
 #if UNITY_EDITOR
-    private void OnValidate()
+    [Button("Get Ragdoll Activators")]
+    private void GetActivators()
     {
         ragdollActivators = GetComponentsInChildren<RagdollActivator>().ToArray();
     }
