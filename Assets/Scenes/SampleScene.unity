@@ -471,14 +471,18 @@ MonoBehaviour:
   iWeight: 0
   team: 1
   parent: {fileID: 1103145728}
-  mesh: {fileID: 1282582619}
   selectIcon: {fileID: 0}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: Target
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
-  fHp: 0
+  col: {fileID: 0}
+  agent: {fileID: 0}
+  mainCamera: {fileID: 0}
+  animator: {fileID: 0}
+  unitLogoController: {fileID: 0}
+  mesh: {fileID: 1282582619}
   fShootingRate: 0
   fReloadDelay: 0
   fBaseDamage: 0
@@ -1188,7 +1192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6a64648ea94864499a6d15f748c1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allUnits: {fileID: 1491660542895555917, guid: 6ef1ec740d397e440ba5f3d5b37b9b72, type: 3}
+  allUnits: {fileID: 11400000, guid: 92c9d9e4e2718a94f8a737067195ceb0, type: 2}
   team: 0
   isControllerByAI: 0
   deltaTime: 1
@@ -1254,7 +1258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6a64648ea94864499a6d15f748c1af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allUnits: {fileID: 1491660542895555917, guid: 6ef1ec740d397e440ba5f3d5b37b9b72, type: 3}
+  allUnits: {fileID: 11400000, guid: 92c9d9e4e2718a94f8a737067195ceb0, type: 2}
   team: 1
   isControllerByAI: 1
   deltaTime: 1
@@ -2191,6 +2195,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2372961915183903736, guid: 0cd5ca04290abc9469c8986284e97d7f, type: 3}
     - target: {fileID: 3596400734238651322, guid: 7105b38ba2e1a7544ac397384fc53f1e, type: 3}
+      propertyPath: resource
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3596400734238651322, guid: 7105b38ba2e1a7544ac397384fc53f1e, type: 3}
       propertyPath: pointsRate
       value: 1
       objectReference: {fileID: 0}
@@ -2758,14 +2766,18 @@ MonoBehaviour:
   iWeight: 0
   team: 1
   parent: {fileID: 1103145728}
-  mesh: {fileID: 5991921945772967891}
   selectIcon: {fileID: 0}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: Target
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
-  fHp: 0
+  col: {fileID: 0}
+  agent: {fileID: 0}
+  mainCamera: {fileID: 0}
+  animator: {fileID: 0}
+  unitLogoController: {fileID: 0}
+  mesh: {fileID: 5991921945772967891}
   fShootingRate: 0
   fReloadDelay: 0
   fBaseDamage: 0

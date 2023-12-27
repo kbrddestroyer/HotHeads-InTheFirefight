@@ -49,7 +49,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [SerializeField] private Canvas gui;
     [SerializeField] private string unitName;
     [Header("Gizmos (Editor Only)")]
-    [SerializeField, ColorPalette] private Color cGizmoColorFOW;
+    [SerializeField, ColorUsage(false)] private Color cGizmoColorFOW;
     #endregion
 
     #region PROTECTED
@@ -276,7 +276,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     }
 
     [Button("Fill")]
-    private void FillRequired()
+    protected virtual void FillRequired()
     {
         col = GetComponent<Collider>();
         agent = GetComponent<NavMeshAgent>();

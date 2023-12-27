@@ -1,33 +1,48 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagable, IShooting
 {
+    /*
+     *  ShootingUnitBase - general class for shooting units. Children can override general methods to create unique
+     *  shooting logic (e.g. anti-tank infantry, CIWS/CRAM, airforces, etc.)
+     *  
+     *  Seek-and-destroy algorythm:
+     *  1. ShootingBaseLogic [VIRTUAL]
+     *  | 1.1. FindClosest
+     *  
+     * 
+     */
+
+    [Space]
+    [Title("ShootingUnitBase Settings", "Settings for shooting units, such as fire rate, base damage, etc.", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
+
     #region EDITOR_VARIABLES
-    [Header("Shooting Unit Logic")]
-    [SerializeField, Range(0f, 10f)] private float fShootingRate;
-    [SerializeField, Range(0f, 10f)] private float fReloadDelay;
-    [SerializeField, Range(0f, 100f)] private float fBaseDamage;
-    [SerializeField, Range(0, 120)] private int iAmmoInWeapon;
-    [SerializeField, Range(0f, 100f)] private float fAttackDistance;
-    [Header("Required Prefabs")]
-    [SerializeField] private Bullet bulletPrefab;
-    [SerializeField] private Transform bulletSpawnPoint;
+    [Header("Shooting Unit Logic")] 
+    [SerializeField, Range(0f, 10f), LabelText("Fire rate")] private float fShootingRate;
+    [SerializeField, Range(0f, 10f), LabelText("Reloading time")] private float fReloadDelay;
+    [SerializeField, Range(0f, 100f), LabelText("Base damage")] private float fBaseDamage;
+    [SerializeField, Range(0, 120), LabelText("Maximum ammo in mag")] private int iAmmoInWeapon;
+    [SerializeField, Range(0f, 100f), LabelText("Attack distance")] private float fAttackDistance;
+    [Header("Required")]
+    [SerializeField, AssetsOnly] private Bullet bulletPrefab;
+    [SerializeField, ChildGameObjectsOnly] private Transform bulletSpawnPoint;
+    [SerializeField] protected AudioSource source;
+    [SerializeField, LabelText("Unit Layer")] protected LayerMask mask;
     [Header("Gizmos Settings")]
-    [SerializeField] private Color cGizmoColorAttackDistance;
+    [SerializeField, ColorUsage(false)] private Color cGizmoColorAttackDistance;
     #endregion
 
     #region PROTECTED_VARIABLES
     protected int iCurrentMagAmmo = 0;
-    [SerializeField] protected int iAmmoTotal = 0;
+    protected int iAmmoTotal = 0;
     protected float fTimePassed = 0f;
 
     public int AmmoTotal { get => iAmmoTotal; set => iAmmoTotal = value; }
 
     public float AttackDistance { get => fAttackDistance; }
-
-    protected AudioSource source;
     #endregion
 
     #region INTERFACES
@@ -75,8 +90,6 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
             fTimePassed += Time.deltaTime;
             if (fTimePassed >= fReloadDelay)
             {
-                // Reload
-
                 fTimePassed = 0;
 
                 iCurrentMagAmmo = Mathf.Clamp(iAmmoTotal, 0, iAmmoInWeapon);
@@ -95,17 +108,16 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
 
     #region UNIT_BASE_EXTENDED
 
-    protected override void Awake()
+    protected void Start()
     {
-        base.Awake();
-        source = GetComponent<AudioSource>();
-
         iCurrentMagAmmo = iAmmoInWeapon;
         iAmmoTotal = iAmmoInWeapon * 2;
     }
 
     protected override void Update()
     {
+        // Lifetime
+
         base.Update();
         ShootingBaseLogic();
     }
@@ -115,10 +127,16 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
     #region LOGIC
     private Transform FindClosest()
     {
-        LayerMask mask = LayerMask.GetMask("Unit");
+        /*
+         *      The algo could be optimised by using general (may be even static) list of enemies 
+         *      thst updates w/ spawning new unit in it's Start/Awake method
+         *      Cycle for each unit in enemy list and check if 
+         */
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, fAttackDistance, mask);
 
-        if (colliders.Length == 0) return null;
+        if (colliders.Length == 0) return null; // If noone's in range
+
         Transform closestEnemy = null;
         float fDistanceToClosest = 0f;
         foreach (Collider _collider in colliders)
@@ -149,6 +167,12 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
         base.OnDrawGizmosSelected();
         Gizmos.color = cGizmoColorAttackDistance;
         Gizmos.DrawWireSphere(transform.position, fAttackDistance);
+    }
+
+    protected override void FillRequired()
+    {
+        base.FillRequired();
+        source = GetComponent<AudioSource>();
     }
 #endif
     #endregion

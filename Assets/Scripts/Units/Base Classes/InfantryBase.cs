@@ -9,14 +9,16 @@ using UnityEngine;
 public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IRagdoll, IShooting
 {
     [Space]
-    [Title("InfantryBase Class Settings", "Settings for Infantry specific settings", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
-    [SerializeField] private RagdollActivator[] ragdollActivators;
+    [Title("InfantryBase Class Settings", "Settings for infantry specific settings", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
+    [SerializeField, Tooltip("Ragdoll activator is a component, that toggles ragdoll physics on specific event")] private RagdollActivator[] ragdollActivators;
+    [SerializeField, LabelText("Rigidbody")] private Rigidbody rb;
+
     // IRagdoll implemented
     public void Switch(bool bSwitch)
     {
         GetComponent<Rigidbody>().isKinematic = bSwitch;
-        GetComponent<Collider>().enabled = !bSwitch;
-        if (GetComponent<Animator>()) GetComponent<Animator>().enabled = !bSwitch;
+        col.enabled = !bSwitch;
+        if (animator) animator.enabled = !bSwitch;
         foreach (RagdollActivator activator in ragdollActivators)
         {
             activator.Switch(bSwitch);
@@ -29,21 +31,17 @@ public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IR
         Switch(true);
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-    }
-
 #if UNITY_EDITOR
     [Button("Get Ragdoll Activators")]
-    private void GetActivators()
+    protected void GetActivators()
     {
         ragdollActivators = GetComponentsInChildren<RagdollActivator>().ToArray();
+    }
+
+    protected override void FillRequired()
+    {
+        base.FillRequired();
+        rb = GetComponent<Rigidbody>();
     }
 #endif
 }
