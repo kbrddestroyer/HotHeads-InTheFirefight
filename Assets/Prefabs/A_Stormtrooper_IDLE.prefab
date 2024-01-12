@@ -1694,7 +1694,7 @@ MonoBehaviour:
   source: {fileID: 8639421719782175403}
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 1}
   ragdollActivators:
   - {fileID: 7492528139264967493}

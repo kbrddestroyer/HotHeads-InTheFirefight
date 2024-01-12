@@ -474,12 +474,12 @@ MonoBehaviour:
   selectIcon: {fileID: 0}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
-  gui: {fileID: 0}
+  gui: {fileID: 752313388}
   unitName: Target
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
-  col: {fileID: 0}
-  agent: {fileID: 0}
-  mainCamera: {fileID: 0}
+  col: {fileID: 358835109}
+  agent: {fileID: 358835107}
+  mainCamera: {fileID: 1794577992}
   animator: {fileID: 0}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 1282582619}
@@ -490,10 +490,14 @@ MonoBehaviour:
   fAttackDistance: 0
   bulletPrefab: {fileID: 0}
   bulletSpawnPoint: {fileID: 0}
+  source: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 0}
-  iAmmoTotal: 0
   ragdollActivators:
   - {fileID: 1282582620}
+  rb: {fileID: 358835108}
 --- !u!4 &358835111
 Transform:
   m_ObjectHideFlags: 0
@@ -764,6 +768,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 2811486772663819472, guid: 4fd7da498f4f0f1458c9c6604bfdd2bc, type: 3}
   m_PrefabInstance: {fileID: 523859526}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &551874160 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4059432660292490372, guid: 2ce0996842c3974488e65bdff7ff0792, type: 3}
+  m_PrefabInstance: {fileID: 6094882423515756675}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &673909080
 GameObject:
@@ -1713,6 +1722,16 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3703932157565320861, guid: d55aa6da78b98444ba9e7e1f71883b45, type: 3}
   m_PrefabInstance: {fileID: 8223104459707981076}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &1750021239 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 3069565111320694948, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
+  m_PrefabInstance: {fileID: 7247169730277344999}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1750021241 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3031086982104501480, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
+  m_PrefabInstance: {fileID: 7247169730277344999}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1782471778 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3411859595648468011, guid: 7105b38ba2e1a7544ac397384fc53f1e, type: 3}
@@ -1734,6 +1753,11 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!20 &1794577992 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6094882423089436144, guid: 2ce0996842c3974488e65bdff7ff0792, type: 3}
+  m_PrefabInstance: {fileID: 6094882423515756675}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1817792323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2021,6 +2045,14 @@ PrefabInstance:
       propertyPath: unitLogo
       value: 
       objectReference: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
+    - target: {fileID: 5378460418780771582, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 551874160}
+    - target: {fileID: 5378460418780771582, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
+      propertyPath: mask.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 5811753529965885131, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -2184,7 +2216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3596400734238651322, guid: 7105b38ba2e1a7544ac397384fc53f1e, type: 3}
       propertyPath: poiName
-      value: Beta point
+      value: Field (B)
       objectReference: {fileID: 0}
     - target: {fileID: 3596400734238651322, guid: 7105b38ba2e1a7544ac397384fc53f1e, type: 3}
       propertyPath: distance
@@ -2343,6 +2375,10 @@ PrefabInstance:
     - target: {fileID: 1821672914823302945, guid: 99db5bea30599754ea26e364fd11be66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1821672914823302946, guid: 99db5bea30599754ea26e364fd11be66, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 1821672914823302957, guid: 99db5bea30599754ea26e364fd11be66, type: 3}
       propertyPath: m_Name
@@ -2769,12 +2805,12 @@ MonoBehaviour:
   selectIcon: {fileID: 0}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
-  gui: {fileID: 0}
+  gui: {fileID: 752313388}
   unitName: Target
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
-  col: {fileID: 0}
-  agent: {fileID: 0}
-  mainCamera: {fileID: 0}
+  col: {fileID: 6854847734304019038}
+  agent: {fileID: 6854847734304019040}
+  mainCamera: {fileID: 1794577992}
   animator: {fileID: 0}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 5991921945772967891}
@@ -2785,10 +2821,14 @@ MonoBehaviour:
   fAttackDistance: 0
   bulletPrefab: {fileID: 0}
   bulletSpawnPoint: {fileID: 0}
+  source: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 0}
-  iAmmoTotal: 0
   ragdollActivators:
   - {fileID: 7732936884638714170}
+  rb: {fileID: 6854847734304019041}
 --- !u!65 &6854847734304019038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2859,9 +2899,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1770252563, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
+      propertyPath: col
+      value: 
+      objectReference: {fileID: 1750021241}
+    - target: {fileID: 1770252563, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
       propertyPath: gui
       value: 
       objectReference: {fileID: 752313388}
+    - target: {fileID: 1770252563, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
+      propertyPath: agent
+      value: 
+      objectReference: {fileID: 1750021239}
     - target: {fileID: 1770252563, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
       propertyPath: parent
       value: 
@@ -2870,6 +2918,10 @@ PrefabInstance:
       propertyPath: unitLogo
       value: 
       objectReference: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
+    - target: {fileID: 1770252563, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1794577992}
     - target: {fileID: 568545248888320723, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
       propertyPath: m_RootOrder
       value: 1

@@ -1,5 +1,7 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,24 +10,20 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIUnitController : MonoBehaviour
 {
-    private UnitBase unitBase;
-    private NavMeshAgent agent;
-    private float fTriggerDistance = 0;
-    private LayerMask unitLayer;
-    private static List<PointOfInterest> poiList;
-    private int teamID;
+    [Header("Unit Dependensies")]
+    [SerializeField] private UnitBase unitBase;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private LayerMask unitLayer;
+
+    [SerializeField] private int teamID;
+    [SerializeField] private float fTriggerDistance = 0;
+
+    [SerializeField] private static List<PointOfInterest> poiList;
+    [SerializeField] private PointOfInterest currentPoi;
+
 
     private void Awake()
     {
-        unitBase = GetComponent<UnitBase>();
-        agent = GetComponent<NavMeshAgent>();
-
-        ShootingUnitBase shooting = unitBase as ShootingUnitBase;
-        if (shooting != null)
-        {
-            fTriggerDistance = shooting.AttackDistance;
-        }
-
         if (!unitBase.Parent.AIControlled)
             this.enabled = false;
 
@@ -33,9 +31,27 @@ public class AIUnitController : MonoBehaviour
         {
             poiList = new List<PointOfInterest>(FindObjectsOfType<PointOfInterest>());
         }
-        unitLayer = LayerMask.GetMask("Unit");
+    }
 
-        teamID = (unitBase.Team == Teams.TEAM_A) ? 1 : -1;
+    private void Start()
+    {
+        currentPoi = SelectOptimalPoint();
+        agent.destination = currentPoi.transform.position;
+    }
+
+    private PointOfInterest SelectOptimalPoint()
+    {
+        PointOfInterest optimal = poiList[0];
+
+        foreach (PointOfInterest poi in poiList)
+        {
+            Debug.Log($"{poi.Name} - {poi.Weight}");
+            if (poi.Status == -1) continue;
+            if (poi.Weight * teamID < optimal.Weight * teamID && poi.Weight >= 0)
+                optimal = poi;
+        }
+
+        return optimal;
     }
 
     private void Update()
@@ -54,18 +70,31 @@ public class AIUnitController : MonoBehaviour
             }
         }
         if (attack) return;
-        // Destination choose
-        PointOfInterest optimal = poiList[0];
-        if (agent.velocity.magnitude == 0)
-        {
-            foreach (PointOfInterest poi in poiList)
-            {
-                Debug.Log($"{poi.Name} - {poi.Weight}");
-                if (poi.Weight * teamID < optimal.Weight * teamID && poi.Weight >= 0)
-                    optimal = poi;
-            }
 
-            agent.destination = optimal.transform.position;
+        // Destination choose
+        
+        if ((agent.velocity.magnitude == 0) && (currentPoi && currentPoi.Status == -1))
+        {
+            currentPoi = SelectOptimalPoint(); 
+            agent.destination = currentPoi.transform.position;
         }
     }
+
+#if UNITY_EDITOR
+    [Button("Get Dependencies")]
+    private void GetDependencies()
+    {
+        unitBase = GetComponent<UnitBase>();
+        agent = GetComponent<NavMeshAgent>();
+        unitLayer = LayerMask.GetMask("Unit");
+        teamID = (unitBase.Team == Teams.TEAM_A) ? 1 : -1;
+
+        ShootingUnitBase shooting = unitBase as ShootingUnitBase;
+        if (shooting != null)
+        {
+            fTriggerDistance = shooting.AttackDistance;
+        }
+    }
+
+#endif
 }
