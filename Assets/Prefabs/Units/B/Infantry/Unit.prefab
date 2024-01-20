@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 5623560115621800383}
   - component: {fileID: 3488501545086083476}
   - component: {fileID: 4099173358091766273}
+  - component: {fileID: 2486804480510982090}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Team2
@@ -266,18 +267,7 @@ MonoBehaviour:
   animator: {fileID: 4349186624126507940}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 1509771709838765355}
-  fShootingRate: 0.1
-  fReloadDelay: 3
-  fBaseDamage: 1.5
-  iAmmoInWeapon: 15
-  fAttackDistance: 3
-  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
-  bulletSpawnPoint: {fileID: 7560293867723891193}
-  source: {fileID: 3488501545086083476}
-  mask:
-    serializedVersion: 2
-    m_Bits: 128
-  cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 1}
+  controller: {fileID: 2486804480510982090}
   ragdollActivators:
   - {fileID: 2721807820784194772}
   - {fileID: 6197076660263175590}
@@ -310,6 +300,7 @@ MonoBehaviour:
     m_Bits: 128
   teamID: -1
   fTriggerDistance: 3
+  currentPoi: {fileID: 0}
 --- !u!136 &75760417034935262
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -458,6 +449,31 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2486804480510982090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794545530934548927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56d9ef5bda0b22488b9365a0923a20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShootingRate: 0.1
+  fReloadDelay: 1
+  fBaseDamage: 1
+  iAmmoInWeapon: 30
+  fAttackDistance: 3.8
+  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
+  bulletSpawnPoint: {fileID: 7560293867723891193}
+  source: {fileID: 3488501545086083476}
+  animator: {fileID: 4349186624126507940}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1001 &3170573616371158403
 PrefabInstance:
   m_ObjectHideFlags: 0

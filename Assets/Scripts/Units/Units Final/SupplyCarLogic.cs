@@ -55,7 +55,7 @@ public class SupplyCarLogic : MechanisedBase, IDestructable, ISelectable, IUnit
 
     private void Supply(ShootingUnitBase shootingUnit)
     {
-        shootingUnit.AmmoTotal += supplyAmount;
+        shootingUnit.Controller.AmmoTotal += supplyAmount;
     }
 
     private void Supply(MechanisedBase mechanisedUnit)

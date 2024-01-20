@@ -92,7 +92,7 @@ public class AIUnitController : MonoBehaviour
         ShootingUnitBase shooting = unitBase as ShootingUnitBase;
         if (shooting != null)
         {
-            fTriggerDistance = shooting.AttackDistance;
+            fTriggerDistance = shooting.Controller.AttackDistance;
         }
     }
 

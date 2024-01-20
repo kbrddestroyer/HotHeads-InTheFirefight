@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootingController : MonoBehaviour, IUnit
+public class ShootingController : MonoBehaviour, IShooting, IUnit
 {
     /*
      *  Shooting Controller is used in every GameObject that can shoot (emit bullets)
@@ -51,8 +51,6 @@ public class ShootingController : MonoBehaviour, IUnit
         if (animator != null && animator.GetBool("shooting") != true)
             animator.SetBool("shooting", true);
         fTimePassed += Time.deltaTime;
-
-        transform.LookAt(target.position + Vector3.up * 0.5f);
 
         if (fTimePassed >= fShootingRate)
         {
@@ -102,6 +100,12 @@ public class ShootingController : MonoBehaviour, IUnit
     #endregion
 
     #endregion
+
+    protected void Start()
+    {
+        iCurrentMagAmmo = iAmmoInWeapon;
+        iAmmoTotal = iAmmoInWeapon * 2;
+    }
 
     #region LOGIC
     protected virtual Transform FindClosest(Teams team)

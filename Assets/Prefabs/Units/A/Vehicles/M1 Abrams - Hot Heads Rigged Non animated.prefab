@@ -1888,6 +1888,7 @@ GameObject:
   - component: {fileID: 7071018007186496366}
   - component: {fileID: 7596057193029140955}
   - component: {fileID: 7596057193029140954}
+  - component: {fileID: 7180327337475378770}
   - component: {fileID: 7596057193029140949}
   - component: {fileID: 7596057193029140952}
   m_Layer: 7
@@ -1958,18 +1959,32 @@ MonoBehaviour:
   animator: {fileID: 0}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 292261639592427962}
-  fShootingRate: 2
-  fReloadDelay: 1.5
+  controller: {fileID: 7180327337475378770}
+--- !u!114 &7180327337475378770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596057193029140948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d36a99f79c93f4282710c6755143fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShootingRate: 1
+  fReloadDelay: 1
   fBaseDamage: 100
-  iAmmoInWeapon: 1
-  fAttackDistance: 11
+  iAmmoInWeapon: 10
+  fAttackDistance: 11.3
   bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
   bulletSpawnPoint: {fileID: 504152543903707464}
   source: {fileID: 7596057193029140952}
+  animator: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 128
-  cGizmoColorAttackDistance: {r: 0.9490197, g: 0, b: 0, a: 1}
+  cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
   turretController: {fileID: 7326217589059537354}
 --- !u!195 &7596057193029140949
 NavMeshAgent:
