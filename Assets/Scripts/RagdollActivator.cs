@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class RagdollActivator : MonoBehaviour, IRagdoll
         Switch(false);
     }
 
+    [Button("Test")]
     public void Switch(bool bState)
     {
         rb.isKinematic = !bState;

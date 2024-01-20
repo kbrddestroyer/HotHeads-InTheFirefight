@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Header("Base Bullet Settings")]
-    [SerializeField, Range(0f, 10f)] private float fSpeed;
+    [SerializeField, Range(0f, 100f)] private float fSpeed;
     [SerializeField, Range(0f, 10f)] private float fLifetime;
 
     private float fBaseDamage = 0f;

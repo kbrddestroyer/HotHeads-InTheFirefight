@@ -3,24 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagable, IShooting
+public class ShootingController : MonoBehaviour, IUnit
 {
     /*
-     *  ShootingUnitBase - general class for shooting units. Children can override general methods to create unique
-     *  shooting logic (e.g. anti-tank infantry, CIWS/CRAM, airforces, etc.)
-     *  
-     *  Seek-and-destroy algorythm:
-     *  1. ShootingBaseLogic [VIRTUAL]
-     *  | 1.1. FindClosest
-     *  
-     * 
+     *  Shooting Controller is used in every GameObject that can shoot (emit bullets)
+     *  |
+     *  |   By:         Keyboard Destroyer
+     *  |   Created:    20.01.2024 14:00
+     *  TODO:
+     *  - Finish class
+     *  - Refactor to use this in Supply logic instead of ShootingUnitBase
      */
-
-    [Space]
-    [Title("ShootingUnitBase Settings", "Settings for shooting units, such as fire rate, base damage, etc.", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
-
+    [Title("Shooting logic controller, used for shooting units, turrets, etc.")]
     #region EDITOR_VARIABLES
-    [Header("Shooting Unit Logic")] 
+    [Header("Shooting Unit Logic")]
     [SerializeField, Range(0f, 10f), LabelText("Fire rate")] private float fShootingRate;
     [SerializeField, Range(0f, 10f), LabelText("Reloading time")] private float fReloadDelay;
     [SerializeField, Range(0f, 100f), LabelText("Base damage")] private float fBaseDamage;
@@ -30,10 +26,12 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
     [SerializeField, AssetsOnly] private Bullet bulletPrefab;
     [SerializeField, ChildGameObjectsOnly] private Transform bulletSpawnPoint;
     [SerializeField] protected AudioSource source;
+    [SerializeField] protected Animator animator;
     [SerializeField, LabelText("Unit Layer")] protected LayerMask mask;
     [Header("Gizmos Settings")]
-    [SerializeField, ColorUsage(false)] private Color cGizmoColorAttackDistance;
+    [SerializeField, ColorUsage(false)] private Color cGizmoColorAttackDistance = new Color(0, 0, 0, 1);
     #endregion
+
 
     #region PROTECTED_VARIABLES
     protected int iCurrentMagAmmo = 0;
@@ -50,7 +48,6 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
     #region ISHOOTING_IMPLEMENTED
     public virtual void Attack(Transform target)
     {
-        if (agent.velocity.magnitude != 0) { return; }
         if (animator != null && animator.GetBool("shooting") != true)
             animator.SetBool("shooting", true);
         fTimePassed += Time.deltaTime;
@@ -106,24 +103,6 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
 
     #endregion
 
-    #region UNIT_BASE_EXTENDED
-
-    protected void Start()
-    {
-        iCurrentMagAmmo = iAmmoInWeapon;
-        iAmmoTotal = iAmmoInWeapon * 2;
-    }
-
-    protected override void Update()
-    {
-        // Lifetime
-
-        base.Update();
-        ShootingBaseLogic(team);
-    }
-
-    #endregion
-
     #region LOGIC
     protected virtual Transform FindClosest(Teams team)
     {
@@ -162,17 +141,10 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
 
     #region UNITY_EDITOR
 #if UNITY_EDITOR
-    protected override void OnDrawGizmosSelected()
+    protected void OnDrawGizmosSelected()
     {
-        base.OnDrawGizmosSelected();
         Gizmos.color = cGizmoColorAttackDistance;
         Gizmos.DrawWireSphere(transform.position, fAttackDistance);
-    }
-
-    protected override void FillRequired()
-    {
-        base.FillRequired();
-        source = GetComponent<AudioSource>();
     }
 #endif
     #endregion

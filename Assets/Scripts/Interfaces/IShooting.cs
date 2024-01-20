@@ -6,5 +6,5 @@ using UnityEngine;
 public interface IShooting
 {
     public void Attack(Transform target);
-    public void ShootingBaseLogic();
+    public void ShootingBaseLogic(Teams team);
 }
