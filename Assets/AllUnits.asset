@@ -13,11 +13,19 @@ MonoBehaviour:
   m_Name: AllUnits
   m_EditorClassIdentifier: 
   unitStructure:
-  - m_Text: 
+  - m_Text: Soldier
     m_Image: {fileID: 0}
     unit: {fileID: 5378460418780771582, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
     team: 0
-  - m_Text: 
+  - m_Text: Soldier
     m_Image: {fileID: 0}
     unit: {fileID: 1474795088559511562, guid: 59fbd8a4c864bf1479ad63e402159cfc, type: 3}
     team: 1
+  - m_Text: HMMWV
+    m_Image: {fileID: 0}
+    unit: {fileID: 1770252563, guid: 5cf72ed105afce642bfbe4ff3ae5ee6c, type: 3}
+    team: 0
+  - m_Text: M1 Abrams
+    m_Image: {fileID: 0}
+    unit: {fileID: 7596057193029140954, guid: fd8182c58e830534485aa84857450bdf, type: 3}
+    team: 0

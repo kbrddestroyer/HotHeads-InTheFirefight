@@ -159,6 +159,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     protected virtual void Awake()
     {
         fHp = fMaxHp;
+        mainCamera = Camera.main;
+        gui = FindObjectOfType<CameraController>().MainCanvas;
+
         Register();
 
         if (agent == null)

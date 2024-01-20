@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         // WARNING
         // Replace this with something more...optimised I guess 
 
-        if (menu)
+        if (menu && !AIControlled)
         {
             menu.options.Clear();
             menu.options.AddRange(units);

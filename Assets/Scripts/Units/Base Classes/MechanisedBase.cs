@@ -6,6 +6,6 @@ public class MechanisedBase : UnitBase, IMechanisedUnit
 {
     public override void OnDeath()
     {
-        Debug.LogError($"{name} has no OnDeath method");
+        
     }
 }

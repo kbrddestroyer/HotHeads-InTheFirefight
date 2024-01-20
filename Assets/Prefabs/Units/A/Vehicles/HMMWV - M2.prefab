@@ -207,14 +207,18 @@ MonoBehaviour:
   iWeight: 0
   team: 0
   parent: {fileID: 0}
-  mesh: {fileID: 6407382745027717284}
   selectIcon: {fileID: 4928929229104483867}
   bCanBeSelectedByOnScreenSelector: 1
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: HMMVW SPL
   cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
-  fHp: 0
+  col: {fileID: 3031086982104501480}
+  agent: {fileID: 3069565111320694948}
+  mainCamera: {fileID: 0}
+  animator: {fileID: 0}
+  unitLogoController: {fileID: 0}
+  mesh: {fileID: 6407382745027717284}
   supplyDelay: 1
   supplyRange: 6.5
   supplyAmount: 3

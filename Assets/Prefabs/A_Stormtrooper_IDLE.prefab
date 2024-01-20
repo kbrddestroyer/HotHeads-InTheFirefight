@@ -1590,6 +1590,7 @@ GameObject:
   - component: {fileID: 7622254825458093088}
   - component: {fileID: 2377591240777693333}
   - component: {fileID: 5378460418780771582}
+  - component: {fileID: 6343345109193328207}
   - component: {fileID: 1051467268177557131}
   - component: {fileID: 4936760076714445233}
   - component: {fileID: 8639421719782175403}
@@ -1666,7 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fMaxHp: 10
-  fFowCutoffDistance: 4
+  fFowCutoffDistance: 7.9
   fRagdollLifetime: 5
   fMinUnitDistance: 0.5
   iWeight: 1
@@ -1677,25 +1678,14 @@ MonoBehaviour:
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: Rifler
-  cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
+  cGizmoColorFOW: {r: 0, g: 0.13692307, b: 1, a: 1}
   col: {fileID: 2377591240777693333}
   agent: {fileID: 4936760076714445233}
   mainCamera: {fileID: 0}
   animator: {fileID: 7622254825458093088}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 5811753529965885131}
-  fShootingRate: 0.1
-  fReloadDelay: 3
-  fBaseDamage: 1.5
-  iAmmoInWeapon: 15
-  fAttackDistance: 3
-  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
-  bulletSpawnPoint: {fileID: 6719234644432676963}
-  source: {fileID: 8639421719782175403}
-  mask:
-    serializedVersion: 2
-    m_Bits: 0
-  cGizmoColorAttackDistance: {r: 0, g: 0, b: 0, a: 1}
+  controller: {fileID: 6343345109193328207}
   ragdollActivators:
   - {fileID: 7492528139264967493}
   - {fileID: 4015314490939768752}
@@ -1710,6 +1700,31 @@ MonoBehaviour:
   - {fileID: 5452787361283117839}
   - {fileID: 7050318438394040651}
   rb: {fileID: 1051467268177557131}
+--- !u!114 &6343345109193328207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7357651463745907195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56d9ef5bda0b22488b9365a0923a20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShootingRate: 0.1
+  fReloadDelay: 1
+  fBaseDamage: 1
+  iAmmoInWeapon: 30
+  fAttackDistance: 3.9
+  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
+  bulletSpawnPoint: {fileID: 6719234644432676963}
+  source: {fileID: 8639421719782175403}
+  animator: {fileID: 7622254825458093088}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &1051467268177557131
 Rigidbody:
   m_ObjectHideFlags: 0
