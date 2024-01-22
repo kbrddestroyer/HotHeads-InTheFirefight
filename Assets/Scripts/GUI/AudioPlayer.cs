@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class AudioPlayer : MonoBehaviour
 {
     [SerializeField] private string pathToOSTFolder;
-    [SerializeField] private Slider slider;
+    [SerializeField, AllowsNull] private Slider slider;
 
     private Object[] clips;
     private float currentClipLength = 0f;
@@ -45,7 +46,7 @@ public class AudioPlayer : MonoBehaviour
     private void Update()
     {
         passedSeconds += Time.deltaTime;
-        slider.value = passedSeconds / currentClipLength;
+        if (slider) slider.value = passedSeconds / currentClipLength;
 
         if (passedSeconds >= currentClipLength)
         {

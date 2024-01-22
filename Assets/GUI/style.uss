@@ -1,0 +1,19 @@
+.btn {
+    font-size: 70px;
+    -unity-font: url('project://database/Assets/Fonts/BlackOpsOne-Regular.ttf?fileID=12800000&guid=47ccea2c51b2da942a8c68e03b386bd5&type=3#BlackOpsOne-Regular');
+    -unity-font-definition: initial;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(41, 41, 41);
+    text-shadow: -7px 7px 0 rgba(0, 0, 0, 0.39);
+}
+
+.btn:hover {
+    scale: 1.1;
+}
