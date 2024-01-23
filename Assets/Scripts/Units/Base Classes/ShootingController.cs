@@ -125,7 +125,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
         foreach (Collider _collider in colliders)
         {
             UnitBase unitBase = _collider.GetComponent<UnitBase>();
-            if (unitBase != null && unitBase.Team != team)
+            if (unitBase != null && unitBase.Team != team && unitBase.enabled)
             {
                 float fDistance = Vector3.Distance(transform.position, _collider.transform.position);
                 if (
