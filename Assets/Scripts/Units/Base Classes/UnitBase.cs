@@ -16,15 +16,18 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
      *  UnitBase - MonoBehaviour class that defines base logic 
      *  of in-game unit behaviour. 
      *  
-     *  Works with user input, NavMesh Agent component, defines HP, FOW and attack logic
+     *  Works with user input, NavMesh Agent component and defines HP
      *  
      *  TODO: 
      *  1. Shooting scripts: attach to weapon settings
+     *  2. Delete all FOW related code from here and migrate to FOWController class
+     *  
      *  
      *  Added in game by KeyboardDestroyer on 15.09.2023 16:30
      *  
      *  Modifies:
      *  Global edit: 20.09.23 by kbrddestroyer: Watch git commit
+     *  Global edit: 23.01.24 by kbrddestroyer: Removing all FOW-related code and migrating it to separated FOWController
      *  
      *  REVIEW THIS PLS
      */
@@ -32,24 +35,23 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     #region EDITOR_VARIABLES
     [Header("Base Unit Settings")]
     [SerializeField, Range(0f, 100f), LabelText("HP Maximum value")]   private float fMaxHp;
-    [SerializeField, Range(0f, 100f), LabelText("FOW Cutoff Distance")]   private float fFowCutoffDistance;
     [SerializeField, Range(0f, 120f), LabelText("Ragdoll lifetime (sec.)")]   private float fRagdollLifetime;
     [Tooltip("Units are using NavMeshAgent and sometimes stuck walking in each other. This parameter always keeps some space between them to prevent this")]
     [SerializeField, Range(0f, 10f), LabelText("Unit Spacing")] private float fMinUnitDistance;
     [SerializeField, Range(0, 10), LabelText("AI Weight")]    private int iWeight;
     [Header("Team Settings")]
     [SerializeField] protected Teams team;
+    [SerializeField] protected LayerMask unitLayer;
     [SerializeField, SceneObjectsOnly] protected PlayerController parent;
     [Header("Selection Tool")]
     [SerializeField, ChildGameObjectsOnly, AllowNull] protected GameObject selectIcon;
     [InfoBox("Replace this with something. This is incorrect way", InfoMessageType = InfoMessageType.Warning)]
     [SerializeField, LabelText("Can be selected in-game?")] private bool bCanBeSelectedByOnScreenSelector;  // parent.hasAuthority
     [Header("GUI Tools")]
-    [SerializeField, AllowNull] private UnitLogoController unitLogo;
+    [SerializeField, AllowNull, AssetsOnly, AssetSelector] private UnitLogoController unitLogo;
     [SerializeField] private Canvas gui;
     [SerializeField] private string unitName;
-    [Header("Gizmos (Editor Only)")]
-    [SerializeField, ColorUsage(false)] private Color cGizmoColorFOW;
+    [SerializeField] private Color minDistanceColor = new Color(0, 0, 0, 1f);
     #endregion
 
     #region PROTECTED
@@ -59,8 +61,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [SerializeField, LabelText("NavMesh reference")] protected NavMeshAgent agent;
     [SerializeField, LabelText("Main Camera")] protected Camera mainCamera;
     [SerializeField] protected Animator animator;
-    [SerializeField] protected UnitLogoController unitLogoController;
-    [SerializeField, ChildGameObjectsOnly] protected GameObject mesh;
+    [SerializeField] private LayerMask groundMask;
+
+    protected UnitLogoController unitLogoController;
 
     protected float   fHp;
     protected bool    bMouseOver = false;
@@ -150,12 +153,6 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     // MonoBehaviour lifecycle
     // Any of lifecycle methods can be overwritten
 
-    protected virtual void ToggleFOW(bool state)
-    {
-        mesh.SetActive(state);
-        unitLogoController.gameObject.SetActive(state);
-    }
-
     protected virtual void Awake()
     {
         fHp = fMaxHp;
@@ -186,6 +183,16 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         bMouseOver = false;
     }
 
+    private void MoveToClickPoint(Vector3 mouseClickPosition)
+    {
+        Ray ray = mainCamera.ScreenPointToRay(mouseClickPosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000f, groundMask))
+        {
+            agent.SetDestination(hit.point);
+        }
+    }
+
     protected virtual void Update()
     {
         if (bCanBeSelectedByOnScreenSelector && parent != null && !parent.AIControlled)
@@ -202,42 +209,23 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
                 {
                     // Compute onTerrain position;
 
-                    LayerMask mask = LayerMask.GetMask("Ground");
-
-                    Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 1000f, mask))
-                    {
-                        agent.SetDestination(hit.point);
-                    }
+                    MoveToClickPoint(Input.mousePosition);
                 }
             }
         }
-        if (parent.AIControlled)
-        {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, fFowCutoffDistance, LayerMask.GetMask("Unit"));
-            bool _enable = false;
-            
-            foreach (Collider col in colliders)
-            {
-                UnitBase baseUnitController = col.GetComponent<UnitBase>();
-                if (baseUnitController && parent.Team != baseUnitController.Team)
-                {
-                    _enable = true;
-                    break;
-                }
-            }
-            ToggleFOW(_enable);
-        }
+        
         if (agent != null && animator != null) animator.SetFloat("speed", agent.velocity.magnitude);
     }
 
     private void LateUpdate()
     {
+        /*
+         *  Code to make space between friendly units. Standing units are trying to "flee"
+         *  from moving units to give them some space
+         */
         if (agent && agent.velocity.magnitude == 0)
         {
-            LayerMask mask = LayerMask.GetMask("Unit");
-            Collider[] colliders = Physics.OverlapSphere(transform.position, fMinUnitDistance, mask);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, fMinUnitDistance, unitLayer);
             Vector3 direction = Vector3.zero;
             foreach (Collider collider in colliders)
             {
@@ -257,10 +245,10 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     protected virtual void OnDisable()
     {
-        mesh.SetActive(true);
         OnDeath();
         if (unitLogoController) Destroy(unitLogoController.gameObject);
         if (GetComponent<AIUnitController>()) Destroy(GetComponent<AIUnitController>());
+        if (GetComponent<FOWController>()) GetComponent<FOWController>().enabled = false;
         Selection.RemoveSelectable(this);
         agent.isStopped = true;
         
@@ -272,9 +260,8 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 #if UNITY_EDITOR
     protected virtual void OnDrawGizmosSelected()
     {
-        Gizmos.color = cGizmoColorFOW;
+        Gizmos.color = minDistanceColor;
 
-        Gizmos.DrawWireSphere(transform.position, fFowCutoffDistance);
         Gizmos.DrawWireSphere(transform.position, fMinUnitDistance);
     }
 

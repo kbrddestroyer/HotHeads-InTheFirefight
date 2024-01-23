@@ -309,6 +309,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 1881078667}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   physicsRoot: {fileID: 1881078668}
 --- !u!195 &154793244
 NavMeshAgent:
@@ -2803,6 +2806,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   unitLogoController: {fileID: 0}
   mesh: {fileID: 5991921945772967891}
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
   physicsRoot: {fileID: 7732936884638714170}
 --- !u!114 &7177589660475321255 stripped
 MonoBehaviour:
@@ -3024,6 +3030,10 @@ PrefabInstance:
     - target: {fileID: 3703932156314594551, guid: d55aa6da78b98444ba9e7e1f71883b45, type: 3}
       propertyPath: m_BlockingMask.m_Bits
       value: 247
+      objectReference: {fileID: 0}
+    - target: {fileID: 3703932157565320930, guid: d55aa6da78b98444ba9e7e1f71883b45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7206854236010356822, guid: d55aa6da78b98444ba9e7e1f71883b45, type: 3}
       propertyPath: sfx

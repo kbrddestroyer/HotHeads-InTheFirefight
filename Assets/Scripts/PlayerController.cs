@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [Header("Unit info")]
     [SerializeField] private Teams team;
     [SerializeField] private bool isControllerByAI;
+    [SerializeField] private bool localPlayer;
     [SerializeField, Range(0f, 10f)] private float deltaTime;
     [SerializeField] private GameObject explosion;
 
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     {
         get => isControllerByAI;
     }
+
+    public bool Local { get => localPlayer; }
 
     [SerializeField] private GameResourceStructure[] resourcesCount;
 

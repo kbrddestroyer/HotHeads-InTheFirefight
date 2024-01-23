@@ -1077,6 +1077,160 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &4491854794154862140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6040506667291702249}
+  - component: {fileID: 4806574588133276596}
+  - component: {fileID: 2662779829673669449}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6040506667291702249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491854794154862140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0, z: -0.0042}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1093877028271067384}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4806574588133276596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491854794154862140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56d9ef5bda0b22488b9365a0923a20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShootingRate: 0.15
+  fReloadDelay: 4
+  fBaseDamage: 1
+  iAmmoInWeapon: 30
+  fAttackDistance: 7
+  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
+  bulletSpawnPoint: {fileID: 6040506667291702249}
+  source: {fileID: 2662779829673669449}
+  animator: {fileID: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
+--- !u!82 &2662779829673669449
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4491854794154862140}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 2510767092655000205, guid: 15a1a0d6624afe74c93d9e2aa6fb8e15, type: 2}
+  m_audioClip: {fileID: 8300000, guid: c786dad99623a8f43a13add9b075b434, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4518058014755824886
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,7 +1631,8 @@ Transform:
   m_LocalPosition: {x: -0.0019035017, y: 0.01028691, z: -0.005466268}
   m_LocalScale: {x: 1, y: 1.0000001, z: 0.99999994}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6040506667291702249}
   m_Father: {fileID: 806542723281641417}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1889,6 +2044,7 @@ GameObject:
   - component: {fileID: 7596057193029140955}
   - component: {fileID: 7596057193029140954}
   - component: {fileID: 7180327337475378770}
+  - component: {fileID: 326533991554890269}
   - component: {fileID: 7596057193029140949}
   - component: {fileID: 7596057193029140952}
   m_Layer: 7
@@ -1941,24 +2097,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fMaxHp: 10
-  fFowCutoffDistance: 12.4
   fRagdollLifetime: 5
   fMinUnitDistance: 3.27
   iWeight: 10
   team: 0
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 64
   parent: {fileID: 0}
   selectIcon: {fileID: 7326217589186135833}
   bCanBeSelectedByOnScreenSelector: 1
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: M1 Abrams
-  cGizmoColorFOW: {r: 0, g: 0.078431375, b: 0.98823535, a: 1}
+  minDistanceColor: {r: 0, g: 0, b: 0, a: 1}
   col: {fileID: 7596057193029140955}
   agent: {fileID: 7596057193029140949}
   mainCamera: {fileID: 0}
   animator: {fileID: 0}
-  unitLogoController: {fileID: 0}
-  mesh: {fileID: 292261639592427962}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   controller: {fileID: 7180327337475378770}
 --- !u!114 &7180327337475378770
 MonoBehaviour:
@@ -1986,6 +2145,26 @@ MonoBehaviour:
     m_Bits: 128
   cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
   turretController: {fileID: 7326217589059537354}
+--- !u!114 &326533991554890269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7596057193029140948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4366457789a7d0644b174740d324162e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fFowCutoffDistance: 15
+  team: 0
+  unit: {fileID: 7596057193029140954}
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 0
+  meshRoot: {fileID: 292261639592427962}
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!195 &7596057193029140949
 NavMeshAgent:
   m_ObjectHideFlags: 0

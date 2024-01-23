@@ -185,12 +185,13 @@ GameObject:
   - component: {fileID: 6014630534564771363}
   - component: {fileID: 4349186624126507940}
   - component: {fileID: 1474795088559511562}
+  - component: {fileID: 2486804480510982090}
   - component: {fileID: 2005587905788172522}
   - component: {fileID: 75760417034935262}
   - component: {fileID: 5623560115621800383}
   - component: {fileID: 3488501545086083476}
   - component: {fileID: 4099173358091766273}
-  - component: {fileID: 2486804480510982090}
+  - component: {fileID: 4192703989872238830}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Team2
@@ -249,24 +250,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fMaxHp: 10
-  fFowCutoffDistance: 4
   fRagdollLifetime: 5
   fMinUnitDistance: 0.5
   iWeight: 1
   team: 1
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 0
   parent: {fileID: 0}
   selectIcon: {fileID: 3297319271863832601}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: Rifler
-  cGizmoColorFOW: {r: 0.9427508, g: 1, b: 0, a: 1}
+  minDistanceColor: {r: 0, g: 0, b: 0, a: 1}
   col: {fileID: 75760417034935262}
   agent: {fileID: 4099173358091766273}
   mainCamera: {fileID: 0}
   animator: {fileID: 4349186624126507940}
-  unitLogoController: {fileID: 0}
-  mesh: {fileID: 1509771709838765355}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
   controller: {fileID: 2486804480510982090}
   ragdollActivators:
   - {fileID: 2721807820784194772}
@@ -281,6 +285,31 @@ MonoBehaviour:
   - {fileID: 4832854388263743344}
   - {fileID: 2218185193492883358}
   rb: {fileID: 5623560115621800383}
+--- !u!114 &2486804480510982090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4794545530934548927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f56d9ef5bda0b22488b9365a0923a20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fShootingRate: 0.1
+  fReloadDelay: 1
+  fBaseDamage: 1
+  iAmmoInWeapon: 30
+  fAttackDistance: 3.8
+  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
+  bulletSpawnPoint: {fileID: 7560293867723891193}
+  source: {fileID: 3488501545086083476}
+  animator: {fileID: 4349186624126507940}
+  mask:
+    serializedVersion: 2
+    m_Bits: 128
+  cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &2005587905788172522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +478,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2486804480510982090
+--- !u!114 &4192703989872238830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,22 +487,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 4794545530934548927}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f56d9ef5bda0b22488b9365a0923a20e, type: 3}
+  m_Script: {fileID: 11500000, guid: 4366457789a7d0644b174740d324162e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fShootingRate: 0.1
-  fReloadDelay: 1
-  fBaseDamage: 1
-  iAmmoInWeapon: 30
-  fAttackDistance: 3.8
-  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
-  bulletSpawnPoint: {fileID: 7560293867723891193}
-  source: {fileID: 3488501545086083476}
-  animator: {fileID: 4349186624126507940}
-  mask:
+  fFowCutoffDistance: 4
+  team: 1
+  unit: {fileID: 1474795088559511562}
+  unitMask:
     serializedVersion: 2
-    m_Bits: 128
-  cGizmoColorAttackDistance: {r: 1, g: 0, b: 0, a: 1}
+    m_Bits: 0
+  meshRoot: {fileID: 2360249276548411602}
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &3170573616371158403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -737,11 +761,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2631827200340690489}
   col: {fileID: 6291491510389290127}
---- !u!1 &1509771709838765355 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4103881766339141800, guid: fd3052bac9933734f83b2235fdd9b360, type: 3}
-  m_PrefabInstance: {fileID: 3170573616371158403}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2188090057342581015 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3629210495886603412, guid: fd3052bac9933734f83b2235fdd9b360, type: 3}
@@ -837,6 +856,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2062557958028456284}
   col: {fileID: 7561416951043085286}
+--- !u!1 &2360249276548411602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fd3052bac9933734f83b2235fdd9b360, type: 3}
+  m_PrefabInstance: {fileID: 3170573616371158403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2574039831119846379 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1132919676311803496, guid: fd3052bac9933734f83b2235fdd9b360, type: 3}

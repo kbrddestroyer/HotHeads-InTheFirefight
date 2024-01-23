@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3069565111320694948}
   - component: {fileID: 4742437029010055853}
   - component: {fileID: 1770252563}
+  - component: {fileID: 7751213039181736128}
   m_Layer: 7
   m_Name: HMMWV - M2
   m_TagString: Team1
@@ -201,28 +202,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fMaxHp: 25
-  fFowCutoffDistance: 7
   fRagdollLifetime: 0
   fMinUnitDistance: 0
   iWeight: 0
   team: 0
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 128
   parent: {fileID: 0}
   selectIcon: {fileID: 4928929229104483867}
   bCanBeSelectedByOnScreenSelector: 1
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 0}
   unitName: HMMVW SPL
-  cGizmoColorFOW: {r: 1, g: 0, b: 0, a: 1}
+  minDistanceColor: {r: 0, g: 0, b: 0, a: 1}
   col: {fileID: 3031086982104501480}
   agent: {fileID: 3069565111320694948}
   mainCamera: {fileID: 0}
   animator: {fileID: 0}
-  unitLogoController: {fileID: 0}
-  mesh: {fileID: 6407382745027717284}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
   supplyDelay: 1
   supplyRange: 6.5
   supplyAmount: 3
   gizmoColor: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &7751213039181736128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912032013090367593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4366457789a7d0644b174740d324162e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fFowCutoffDistance: 7
+  team: 0
+  unit: {fileID: 1770252563}
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 128
+  meshRoot: {fileID: 6407382745027717284}
+  gizmoColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1056316627487856394
 GameObject:
   m_ObjectHideFlags: 0
