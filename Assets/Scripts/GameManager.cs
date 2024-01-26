@@ -12,17 +12,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winState;
     [SerializeField] private GameObject looseState;
 
+    private static PointOfInterest[] poiList;
+    public static PointOfInterest[] POI { get => poiList; }
+
     private static GameManager instance;
     public static GameManager Instance { get => instance; }
 
     private void Start()
     {
         instance = this;
+        poiList = FindObjectsOfType<PointOfInterest>();
     }
 
     public void ValidateWin(PlayerController controller)
     {
-        Debug.Log($"validation {controller.getResource(GameResources.WINPOINTS).Amount} ");
         if (controller.getResource(GameResources.WINPOINTS).Amount >= winpointsRequired)
         {
             if (controller.Team == localPlayerController.Team)

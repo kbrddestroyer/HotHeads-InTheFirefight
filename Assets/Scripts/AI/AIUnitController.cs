@@ -18,24 +18,12 @@ public class AIUnitController : MonoBehaviour
     [SerializeField] private int teamID;
     [SerializeField] private float fTriggerDistance = 0;
 
-    [SerializeField] private static List<PointOfInterest> poiList;
     [SerializeField] private PointOfInterest currentPoi;
-
-    public static void ClearPois()
-    {
-        poiList.Clear();
-        poiList = null;
-    }
 
     private void Awake()
     {
         if (!unitBase.Parent.AIControlled)
             this.enabled = false;
-
-        if (poiList == null)
-        {
-            poiList = new List<PointOfInterest>(FindObjectsOfType<PointOfInterest>());
-        }
     }
 
     private void Start()
@@ -46,11 +34,10 @@ public class AIUnitController : MonoBehaviour
 
     private PointOfInterest SelectOptimalPoint()
     {
-        PointOfInterest optimal = poiList[0];
+        PointOfInterest optimal = GameManager.POI[0];
 
-        foreach (PointOfInterest poi in poiList)
+        foreach (PointOfInterest poi in GameManager.POI)
         {
-            Debug.Log($"{poi.Name} - {poi.Weight}");
             if (poi.Status == -1) continue;
             if (poi.Weight * teamID < optimal.Weight * teamID && poi.Weight >= 0)
                 optimal = poi;

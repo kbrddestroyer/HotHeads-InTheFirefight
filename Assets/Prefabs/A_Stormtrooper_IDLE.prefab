@@ -1801,6 +1801,12 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  cost:
+  - type: 1
+    amount: 30
+    baseAppliance: 0
+    label: {fileID: 0}
+    applianceLabel: {fileID: 0}
   controller: {fileID: 6343345109193328207}
   ragdollActivators:
   - {fileID: 7492528139264967493}

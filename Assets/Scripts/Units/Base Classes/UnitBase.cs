@@ -34,7 +34,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     #region EDITOR_VARIABLES
     [Header("Base Unit Settings")]
+    [SerializeField] private UnitType type;
     [SerializeField, Range(0f, 100f), LabelText("HP Maximum value")]   private float fMaxHp;
+    [SerializeField, Range(0f, 100f), LabelText("HP Maximum value")]   private float fMaxArmor;
     [SerializeField, Range(0f, 120f), LabelText("Ragdoll lifetime (sec.)")]   private float fRagdollLifetime;
     [Tooltip("Units are using NavMeshAgent and sometimes stuck walking in each other. This parameter always keeps some space between them to prevent this")]
     [SerializeField, Range(0f, 10f), LabelText("Unit Spacing")] private float fMinUnitDistance;
@@ -62,10 +64,13 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [SerializeField, LabelText("Main Camera")] protected Camera mainCamera;
     [SerializeField] protected Animator animator;
     [SerializeField] private LayerMask groundMask;
+    [SerializeField] private GameResourceStructure[] cost;
+    public GameResourceStructure[] Cost { get => cost; }
 
     protected UnitLogoController unitLogoController;
 
     protected float   fHp;
+    protected float   fArmor;
     protected bool    bMouseOver = false;
     protected bool    bSelected = false;
     #endregion
@@ -80,6 +85,12 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
             fHp = value;
             if (fHp <= 0) this.enabled = false;
         } 
+    }
+
+    public float Armor
+    {
+        get => fArmor;
+        set => fArmor = (value > 0) ? value : 0;
     }
 
     public bool Selected { 

@@ -22,6 +22,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, AllowNull] protected TMP_Dropdown menu;
 
+    private Firepower firepower;
+    public int Infantry
+    {
+        get => firepower.Infantry;
+    }
+
+    public int Mechanised
+    {
+        get => firepower.Mechanised;
+    }
+
     protected float timePassed;
 
     protected List<UnitStructureInformation> units;
@@ -69,9 +80,19 @@ public class PlayerController : MonoBehaviour
 
     protected void SpawnSelectedUnit(UnitBase unitPrefab)
     {
+        foreach (GameResourceStructure resource in unitPrefab.Cost)
+        {
+            if (resource.Amount > getResource(resource.Type).Amount)
+                return;
+        }
         unitPrefab.Parent = this;
         UnitBase unit = Instantiate(unitPrefab, transform.position, transform.rotation);
         unit.Parent = this;
+
+        foreach (GameResourceStructure resource in unitPrefab.Cost)
+        {
+            getResource(resource.Type).Amount -= resource.Amount;
+        }
     }
 
     public virtual void Awake()

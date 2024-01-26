@@ -24,7 +24,6 @@ public class TransitionManager : MonoBehaviour
             progress.value = loading.progress;
             await Task.Delay(1500);
         } while (loading.progress < 0.9f);
-        AIUnitController.ClearPois();
         loading.allowSceneActivation = true;
     }
 
