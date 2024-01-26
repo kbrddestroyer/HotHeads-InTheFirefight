@@ -54,7 +54,7 @@ public class AudioPlayer : MonoBehaviour
         }
     }
 
-    private void OnValidate()
+    private void Start()
     {
         Debug.Log("Loading resources...");
         clips = Resources.LoadAll(pathToOSTFolder);

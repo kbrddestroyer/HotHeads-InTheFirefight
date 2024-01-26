@@ -273,6 +273,9 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         animator = GetComponent<Animator>();
         mainCamera = Camera.main;
         gui = FindObjectOfType<CameraController>().MainCanvas;
+
+        unitLayer = LayerMask.GetMask("Unit");
+        groundMask = LayerMask.GetMask("Ground");
     }
 #endif
     #endregion

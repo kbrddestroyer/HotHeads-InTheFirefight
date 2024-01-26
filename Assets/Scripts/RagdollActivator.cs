@@ -25,6 +25,8 @@ public class RagdollActivator : MonoBehaviour, IRagdoll
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
+
+        Switch(false);
     }
 #endif
 }

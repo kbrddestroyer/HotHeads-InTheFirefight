@@ -29,3 +29,7 @@ MonoBehaviour:
     m_Image: {fileID: 0}
     unit: {fileID: 7596057193029140954, guid: fd8182c58e830534485aa84857450bdf, type: 3}
     team: 0
+  - m_Text: Sniper
+    m_Image: {fileID: 0}
+    unit: {fileID: 1230560401320313904, guid: 2934556b86f6ae546b6b59afea627083, type: 3}
+    team: 0

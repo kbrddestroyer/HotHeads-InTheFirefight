@@ -5,6 +5,6 @@ using UnityEngine;
 public interface IDamagable
 {
     public float HP { get; set; }
-
+    public Teams Team { get; }
     public void OnDeath();
 }

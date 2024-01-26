@@ -26,10 +26,9 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
 
     public ShootingController Controller { get => controller; }
 
-    public virtual void Attack(Transform target)
+    public virtual void Attack(Transform target, Teams team)
     {
-        controller.Attack(target);
-        transform.LookAt(target);
+        controller.Attack(target, team);
     }
 
     public virtual void ShootingBaseLogic(Teams team)

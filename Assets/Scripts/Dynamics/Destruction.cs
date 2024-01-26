@@ -8,7 +8,7 @@ public class Destruction : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             for (int i = 0; i < this.transform.childCount; i++)
             {
@@ -20,15 +20,9 @@ public class Destruction : MonoBehaviour
                 {
                     rb.isKinematic = false;
                     col.enabled = true;
+                    Destroy(ob, 2);
                 }
             }
         }
     }
-
-#if UNITY_EDITOR
-    private void OnValidate()
-    {
-        
-    }
-#endif
 }

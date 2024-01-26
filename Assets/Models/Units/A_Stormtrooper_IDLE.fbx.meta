@@ -113,7 +113,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: "Ko\u015Bci szturmowiec 1|Ko\u015Bci szturmowiec 1Action"
+      name: Idle
       takeName: "Ko\u015Bci szturmowiec 1|Ko\u015Bci szturmowiec 1Action"
       internalID: 9181153079129525189
       firstFrame: 0

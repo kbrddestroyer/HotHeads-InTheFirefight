@@ -17,7 +17,6 @@ public class TransitionManager : MonoBehaviour
     {
         transition.SetTrigger("transition");
         yield return new WaitForSeconds(5.0f);
-        progress.gameObject.SetActive(true);
         AsyncOperation loading = SceneManager.LoadSceneAsync(sceneName);
         loading.allowSceneActivation = false;
         while (loading.progress < 0.9f)
@@ -43,8 +42,8 @@ public class TransitionManager : MonoBehaviour
         loading.allowSceneActivation = true;
     }
 
-    public void Invoke(string sceneName)
+    public async void Invoke(string sceneName)
     {
-        StartCoroutine(asyncSceneLoader(sceneName));
+        await sceneLoader(sceneName);
     }
 }

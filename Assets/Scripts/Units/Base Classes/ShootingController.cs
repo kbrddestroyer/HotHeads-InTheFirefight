@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ShootingController : MonoBehaviour, IShooting, IUnit
 {
@@ -17,19 +18,19 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     [Title("Shooting logic controller, used for shooting units, turrets, etc.")]
     #region EDITOR_VARIABLES
     [Header("Shooting Unit Logic")]
-    [SerializeField, Range(0f, 10f), LabelText("Fire rate")] private float fShootingRate;
-    [SerializeField, Range(0f, 10f), LabelText("Reloading time")] private float fReloadDelay;
-    [SerializeField, Range(0f, 100f), LabelText("Base damage")] private float fBaseDamage;
-    [SerializeField, Range(0, 120), LabelText("Maximum ammo in mag")] private int iAmmoInWeapon;
-    [SerializeField, Range(0f, 100f), LabelText("Attack distance")] private float fAttackDistance;
+    [SerializeField, Range(0f, 10f), LabelText("Fire rate")] protected float fShootingRate;
+    [SerializeField, Range(0f, 10f), LabelText("Reloading time")] protected float fReloadDelay;
+    [SerializeField, Range(0f, 100f), LabelText("Base damage")] protected float fBaseDamage;
+    [SerializeField, Range(0, 120), LabelText("Maximum ammo in mag")] protected int iAmmoInWeapon;
+    [SerializeField, Range(0f, 100f), LabelText("Attack distance")] protected float fAttackDistance;
     [Header("Required")]
-    [SerializeField, AssetsOnly] private Bullet bulletPrefab;
-    [SerializeField, ChildGameObjectsOnly] private Transform bulletSpawnPoint;
+    [SerializeField, AssetsOnly] protected Bullet bulletPrefab;
+    [SerializeField, ChildGameObjectsOnly] protected Transform bulletSpawnPoint;
     [SerializeField] protected AudioSource source;
     [SerializeField] protected Animator animator;
     [SerializeField, LabelText("Unit Layer")] protected LayerMask mask;
     [Header("Gizmos Settings")]
-    [SerializeField, ColorUsage(false)] private Color cGizmoColorAttackDistance = new Color(0, 0, 0, 1);
+    [SerializeField, ColorUsage(false)] protected Color cGizmoColorAttackDistance = new Color(0, 0, 0, 1);
     #endregion
 
 
@@ -46,18 +47,19 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     #region INTERFACES
 
     #region ISHOOTING_IMPLEMENTED
-    public virtual void Attack(Transform target)
+    public virtual void Attack(Transform target, Teams team)
     {
         if (animator != null && animator.GetBool("shooting") != true)
             animator.SetBool("shooting", true);
         fTimePassed += Time.deltaTime;
-
+        transform.LookAt(target);
         if (fTimePassed >= fShootingRate)
         {
             source.Play();
             fTimePassed = 0;
             iCurrentMagAmmo--;
             Bullet _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            _bullet.Owner = team;
             _bullet.GetComponent<Bullet>().BaseDamage = fBaseDamage;
             _bullet.transform.LookAt(target.position + Vector3.up * 0.5f);
         }
@@ -71,7 +73,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
 
             if (closestEnemy != null)
             {
-                Attack(closestEnemy);
+                Attack(closestEnemy, team);
             }
             else
             {
@@ -138,7 +140,6 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
                 }
             }
         }
-
         return closestEnemy;
     }
     #endregion

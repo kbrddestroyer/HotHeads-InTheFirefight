@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 154793245}
   - component: {fileID: 154793244}
   - component: {fileID: 154793243}
+  - component: {fileID: 154793248}
   m_Layer: 7
   m_Name: target (1)
   m_TagString: Untagged
@@ -291,25 +292,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fMaxHp: 10
-  fFowCutoffDistance: 0
   fRagdollLifetime: 5
   fMinUnitDistance: 0
   iWeight: 0
   team: 1
-  parent: {fileID: 1103145728}
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  parent: {fileID: 1103145730}
   selectIcon: {fileID: 0}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 752313388}
   unitName: Dummy
-  cGizmoColorFOW: {r: 0, g: 0, b: 0, a: 0}
+  minDistanceColor: {r: 0, g: 0, b: 0, a: 1}
   col: {fileID: 154793246}
   agent: {fileID: 154793244}
   mainCamera: {fileID: 1794577992}
   animator: {fileID: 0}
-  unitLogoController: {fileID: 0}
-  mesh: {fileID: 1881078667}
-  mask:
+  groundMask:
     serializedVersion: 2
     m_Bits: 0
   physicsRoot: {fileID: 1881078668}
@@ -380,6 +381,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &154793248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154793242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4366457789a7d0644b174740d324162e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fFowCutoffDistance: 0
+  team: 1
+  unit: {fileID: 154793243}
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 128
+  meshRoot: {fileID: 1881078667}
+  gizmoColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &297895374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -463,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3038264007462161229, guid: 0d6f4dd913dc2bd48a375b77ec1598d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.056
+      value: 1.086
       objectReference: {fileID: 0}
     - target: {fileID: 3038264007462161229, guid: 0d6f4dd913dc2bd48a375b77ec1598d1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1290,7 +1311,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1103145729}
-  - component: {fileID: 1103145728}
+  - component: {fileID: 1103145730}
   m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
@@ -1298,7 +1319,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!114 &1103145728
+--- !u!4 &1103145729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103145727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.2, y: 0.525, z: 45.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1103145730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1307,14 +1343,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1103145727}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af6a64648ea94864499a6d15f748c1af, type: 3}
+  m_Script: {fileID: 11500000, guid: c7b519af3a86f46428d3760af9afac5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allUnits: {fileID: 11400000, guid: 92c9d9e4e2718a94f8a737067195ceb0, type: 2}
   team: 1
   isControllerByAI: 1
-  deltaTime: 1
-  explosion: {fileID: 8755994347345367945, guid: 49628dc49b8e38740a8dc1831dcd1fde, type: 3}
+  localPlayer: 0
+  deltaTime: 0.1
+  explosion: {fileID: 0}
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
   menu: {fileID: 0}
   resourcesCount:
   - type: 0
@@ -1332,21 +1372,6 @@ MonoBehaviour:
     baseAppliance: 2
     label: {fileID: 0}
     applianceLabel: {fileID: 0}
---- !u!4 &1103145729
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103145727}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.2, y: 0.525, z: 45.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 15
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1177769527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1586,7 +1611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3038264007462161229, guid: 0d6f4dd913dc2bd48a375b77ec1598d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.062
+      value: 1.164
       objectReference: {fileID: 0}
     - target: {fileID: 3038264007462161229, guid: 0d6f4dd913dc2bd48a375b77ec1598d1, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2160,6 +2185,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1541653028}
     - target: {fileID: 127104457026100127, guid: 74b4af6eb518b184583fe13cf34faa8a, type: 3}
+      propertyPath: localPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127104457026100127, guid: 74b4af6eb518b184583fe13cf34faa8a, type: 3}
+      propertyPath: ground.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 127104457026100127, guid: 74b4af6eb518b184583fe13cf34faa8a, type: 3}
       propertyPath: resourcesCount.Array.data[0].label
       value: 
       objectReference: {fileID: 7523414098365186778}
@@ -2602,6 +2635,7 @@ GameObject:
   - component: {fileID: 6854847734304019041}
   - component: {fileID: 6854847734304019040}
   - component: {fileID: 6854847734304019042}
+  - component: {fileID: 6854847734304019043}
   m_Layer: 7
   m_Name: target
   m_TagString: Untagged
@@ -2623,6 +2657,10 @@ PrefabInstance:
     - target: {fileID: 4059432660292490372, guid: 2ce0996842c3974488e65bdff7ff0792, type: 3}
       propertyPath: orthographic size
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094882423089436150, guid: 2ce0996842c3974488e65bdff7ff0792, type: 3}
+      propertyPath: delta
+      value: 5.3
       objectReference: {fileID: 0}
     - target: {fileID: 6094882423089436150, guid: 2ce0996842c3974488e65bdff7ff0792, type: 3}
       propertyPath: selection
@@ -2788,28 +2826,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fMaxHp: 10
-  fFowCutoffDistance: 5.9
   fRagdollLifetime: 5
   fMinUnitDistance: 0
   iWeight: 0
   team: 1
-  parent: {fileID: 1103145728}
+  unitLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  parent: {fileID: 1103145730}
   selectIcon: {fileID: 0}
   bCanBeSelectedByOnScreenSelector: 0
   unitLogo: {fileID: 2979363105918297848, guid: 4e1c1c3e2825c5f459d379eb4fb338f9, type: 3}
   gui: {fileID: 752313388}
   unitName: Dummy
-  cGizmoColorFOW: {r: 0, g: 0, b: 0, a: 0}
+  minDistanceColor: {r: 0, g: 0, b: 0, a: 1}
   col: {fileID: 6854847734304019038}
   agent: {fileID: 6854847734304019040}
   mainCamera: {fileID: 1794577992}
   animator: {fileID: 0}
-  unitLogoController: {fileID: 0}
-  mesh: {fileID: 5991921945772967891}
-  mask:
+  groundMask:
     serializedVersion: 2
     m_Bits: 0
   physicsRoot: {fileID: 7732936884638714170}
+--- !u!114 &6854847734304019043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082849201038117094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4366457789a7d0644b174740d324162e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fFowCutoffDistance: 0
+  team: 1
+  unit: {fileID: 6854847734304019042}
+  unitMask:
+    serializedVersion: 2
+    m_Bits: 128
+  meshRoot: {fileID: 5991921945772967891}
+  gizmoColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &7177589660475321255 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8852962074140078829, guid: 99db5bea30599754ea26e364fd11be66, type: 3}

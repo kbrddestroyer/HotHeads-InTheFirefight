@@ -10,20 +10,20 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [Header("Global Unit List Scriptable Object")]
-    [SerializeField] private GlobalUnitList allUnits;
+    [SerializeField] protected GlobalUnitList allUnits;
     [Header("Unit info")]
-    [SerializeField] private Teams team;
-    [SerializeField] private bool isControllerByAI;
-    [SerializeField] private bool localPlayer;
-    [SerializeField, Range(0f, 10f)] private float deltaTime;
-    [SerializeField] private GameObject explosion;
+    [SerializeField] protected Teams team;
+    [SerializeField] protected bool isControllerByAI;
+    [SerializeField] protected bool localPlayer;
+    [SerializeField, Range(0f, 10f)] protected float deltaTime;
+    [SerializeField] protected GameObject explosion;
+    [SerializeField] private LayerMask ground;
 
-    [SerializeField, AllowNull] private TMP_Dropdown menu;
+    [SerializeField, AllowNull] protected TMP_Dropdown menu;
 
-    private float timePassed;
-    private LayerMask ground;
+    protected float timePassed;
 
-    private List<UnitStructureInformation> units;
+    protected List<UnitStructureInformation> units;
 
     public Teams Team { get => team; }
 
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     public bool Local { get => localPlayer; }
 
-    [SerializeField] private GameResourceStructure[] resourcesCount;
+    [SerializeField] protected GameResourceStructure[] resourcesCount;
 
     public void addResourceAppliance(GameResources resource, float appliance)
     {
@@ -66,14 +66,14 @@ public class PlayerController : MonoBehaviour
         SpawnSelectedUnit(unit);
     }
 
-    private void SpawnSelectedUnit(UnitBase unitPrefab)
+    protected void SpawnSelectedUnit(UnitBase unitPrefab)
     {
         unitPrefab.Parent = this;
         UnitBase unit = Instantiate(unitPrefab, transform.position, transform.rotation);
         unit.Parent = this;
     }
 
-    public void Awake()
+    public virtual void Awake()
     {
         units = allUnits.Units.ToList<UnitStructureInformation>();
         units.RemoveAll(u => u.team != Team);      
@@ -90,11 +90,9 @@ public class PlayerController : MonoBehaviour
         {
             _res.Appliance = _res.baseAppliance;
         }
-
-        ground = LayerMask.GetMask("Ground");
     }
 
-    public void Update()
+    public virtual void Update()
     {
         timePassed += Time.deltaTime;
         if (timePassed >= deltaTime)
@@ -107,15 +105,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isControllerByAI)
-        {
-            GameResourceStructure manpwr = getResource(GameResources.MANPOWER);
-            if (manpwr.Amount >= 30)
-            {
-                SpawnSelectedUnit(units[0].unit);
-                manpwr.Amount -= 30;
-            }
-        }
         else
         {
             if (Input.GetKeyDown(KeyCode.E)) {
