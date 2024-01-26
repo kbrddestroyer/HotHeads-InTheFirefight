@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -102,6 +103,11 @@ public class PlayerController : MonoBehaviour
             foreach (GameResourceStructure _res in resourcesCount)
             {
                 _res.Amount += _res.Appliance;
+
+                if (_res.Type == GameResources.WINPOINTS)
+                {
+                    GameManager.Instance.ValidateWin(this);
+                }
             }
         }
 

@@ -21,6 +21,11 @@ public class AIUnitController : MonoBehaviour
     [SerializeField] private static List<PointOfInterest> poiList;
     [SerializeField] private PointOfInterest currentPoi;
 
+    public static void ClearPois()
+    {
+        poiList.Clear();
+        poiList = null;
+    }
 
     private void Awake()
     {

@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    // Sigleton object
+
+    [SerializeField] private PlayerController localPlayerController;
+    [SerializeField, Range(0f, 1000f)] private float winpointsRequired;
+
+    [SerializeField] private GameObject winState;
+    [SerializeField] private GameObject looseState;
+
+    private static GameManager instance;
+    public static GameManager Instance { get => instance; }
+
+    private void Start()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ValidateWin(PlayerController controller)
     {
-        
+        Debug.Log($"validation {controller.getResource(GameResources.WINPOINTS).Amount} ");
+        if (controller.getResource(GameResources.WINPOINTS).Amount >= winpointsRequired)
+        {
+            if (controller.Team == localPlayerController.Team)
+                winState.SetActive(true);
+            else looseState.SetActive(true);
+        }
     }
 }
