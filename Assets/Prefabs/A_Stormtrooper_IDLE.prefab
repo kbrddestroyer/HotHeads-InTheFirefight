@@ -1779,7 +1779,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacb8f051975bf0478f7588322c4c60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: {fileID: 0}
   fMaxHp: 10
+  fMaxArmor: 0
   fRagdollLifetime: 5
   fMinUnitDistance: 0.5
   iWeight: 1

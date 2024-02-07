@@ -16,7 +16,7 @@ public class AIUnitController : MonoBehaviour
     [SerializeField] private LayerMask unitLayer;
 
     [SerializeField] private int teamID;
-    [SerializeField] private float fTriggerDistance = 0;
+    [SerializeField, Range(0f, 10f)] private float fTriggerDistance;
 
     [SerializeField] private PointOfInterest currentPoi;
 
@@ -80,12 +80,6 @@ public class AIUnitController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         unitLayer = LayerMask.GetMask("Unit");
         teamID = (unitBase.Team == Teams.TEAM_A) ? 1 : -1;
-
-        ShootingUnitBase shooting = unitBase as ShootingUnitBase;
-        if (shooting != null)
-        {
-            fTriggerDistance = shooting.Controller.AttackDistance;
-        }
     }
 
 #endif

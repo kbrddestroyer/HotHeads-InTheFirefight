@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Android.LowLevel;
 
 [RequireComponent(typeof(ShootingController))]
 public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagable
@@ -21,19 +22,21 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
     [Title("ShootingUnitBase Settings", "Settings for shooting units, such as fire rate, base damage, etc.", horizontalLine: true, bold: true, TitleAlignment = TitleAlignments.Centered)]
 
     #region EDITOR_VARIABLES
-    [SerializeField] private ShootingController controller;
+    [SerializeField] private ShootingController[] controllers;
     #endregion
 
-    public ShootingController Controller { get => controller; }
+    public ShootingController[] Controllers { get => controllers; }
 
     public virtual void Attack(Transform target, Teams team)
     {
-        controller.Attack(target, team);
+        foreach (ShootingController controller in controllers)
+            controller.Attack(target, team);
     }
 
     public virtual void ShootingBaseLogic(Teams team)
     {
-        controller.ShootingBaseLogic(team);
+        foreach (ShootingController controller in controllers)
+            controller.ShootingBaseLogic(team);
     }
     
     #region UNIT_BASE_EXTENDED
@@ -47,4 +50,12 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
     }
 
     #endregion
+
+#if UNITY_EDITOR
+    [Button("Get all controllers")]
+    private void GetAllControllers()
+    {
+        controllers = GetComponentsInChildren<ShootingController>();
+    }
+#endif
 }

@@ -55,7 +55,8 @@ public class SupplyCarLogic : MechanisedBase, IDestructable, ISelectable, IUnit
 
     private void Supply(ShootingUnitBase shootingUnit)
     {
-        shootingUnit.Controller.AmmoTotal += supplyAmount;
+        foreach (ShootingController controller in shootingUnit.Controllers)
+            controller.AmmoTotal += supplyAmount;
     }
 
     private void Supply(MechanisedBase mechanisedUnit)

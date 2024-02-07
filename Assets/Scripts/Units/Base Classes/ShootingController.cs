@@ -23,6 +23,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     [SerializeField, Range(0f, 100f), LabelText("Base damage")] protected float fBaseDamage;
     [SerializeField, Range(0, 120), LabelText("Maximum ammo in mag")] protected int iAmmoInWeapon;
     [SerializeField, Range(0f, 100f), LabelText("Attack distance")] protected float fAttackDistance;
+    [SerializeField] private UnitType attackType;
     [Header("Required")]
     [SerializeField, AssetsOnly] protected Bullet bulletPrefab;
     [SerializeField, ChildGameObjectsOnly] protected Transform bulletSpawnPoint;
