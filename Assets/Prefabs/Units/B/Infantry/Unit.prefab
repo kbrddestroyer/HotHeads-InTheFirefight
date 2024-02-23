@@ -249,14 +249,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacb8f051975bf0478f7588322c4c60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
   fMaxHp: 10
+  fMaxArmor: 0
   fRagdollLifetime: 5
   fMinUnitDistance: 0.5
   iWeight: 1
   team: 1
   unitLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   parent: {fileID: 0}
   selectIcon: {fileID: 3297319271863832601}
   bCanBeSelectedByOnScreenSelector: 0
@@ -270,8 +272,10 @@ MonoBehaviour:
   animator: {fileID: 4349186624126507940}
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
-  controller: {fileID: 2486804480510982090}
+    m_Bits: 128
+  cost: []
+  controllers:
+  - {fileID: 2486804480510982090}
   ragdollActivators:
   - {fileID: 2721807820784194772}
   - {fileID: 6197076660263175590}
@@ -302,6 +306,7 @@ MonoBehaviour:
   fBaseDamage: 1
   iAmmoInWeapon: 30
   fAttackDistance: 3.8
+  attackType: 0
   bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
   bulletSpawnPoint: {fileID: 7560293867723891193}
   source: {fileID: 3488501545086083476}

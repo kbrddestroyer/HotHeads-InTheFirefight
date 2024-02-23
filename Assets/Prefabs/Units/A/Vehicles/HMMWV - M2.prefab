@@ -201,7 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34183b7b3c8ed3f4bbf89b746ceb94ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 2
   fMaxHp: 25
+  fMaxArmor: 0
   fRagdollLifetime: 0
   fMinUnitDistance: 0
   iWeight: 0
@@ -223,6 +225,7 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  cost: []
   supplyDelay: 1
   supplyRange: 6.5
   supplyAmount: 3

@@ -1125,8 +1125,10 @@ MonoBehaviour:
   fShootingRate: 0.15
   fReloadDelay: 4
   fBaseDamage: 1
+  fArmorDamage: 0
   iAmmoInWeapon: 30
   fAttackDistance: 7
+  attackType: 0
   bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
   bulletSpawnPoint: {fileID: 6040506667291702249}
   source: {fileID: 2662779829673669449}
@@ -2096,7 +2098,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1ea215250b1c44fb73e35c111a5208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fMaxHp: 10
+  type: 0
+  fMaxHp: 1
+  fMaxArmor: 3
   fRagdollLifetime: 5
   fMinUnitDistance: 3.27
   iWeight: 10
@@ -2118,7 +2122,10 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  controller: {fileID: 7180327337475378770}
+  cost: []
+  controllers:
+  - {fileID: 7180327337475378770}
+  - {fileID: 4806574588133276596}
 --- !u!114 &7180327337475378770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2134,8 +2141,10 @@ MonoBehaviour:
   fShootingRate: 1
   fReloadDelay: 1
   fBaseDamage: 100
+  fArmorDamage: 0
   iAmmoInWeapon: 10
   fAttackDistance: 11.3
+  attackType: 1
   bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
   bulletSpawnPoint: {fileID: 504152543903707464}
   source: {fileID: 7596057193029140952}

@@ -1779,7 +1779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bacb8f051975bf0478f7588322c4c60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: {fileID: 0}
+  type: 0
   fMaxHp: 10
   fMaxArmor: 0
   fRagdollLifetime: 5
@@ -1809,7 +1809,8 @@ MonoBehaviour:
     baseAppliance: 0
     label: {fileID: 0}
     applianceLabel: {fileID: 0}
-  controller: {fileID: 6343345109193328207}
+  controllers:
+  - {fileID: 6343345109193328207}
   ragdollActivators:
   - {fileID: 7492528139264967493}
   - {fileID: 4015314490939768752}
@@ -1841,6 +1842,7 @@ MonoBehaviour:
   fBaseDamage: 1
   iAmmoInWeapon: 30
   fAttackDistance: 3.9
+  attackType: 0
   bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
   bulletSpawnPoint: {fileID: 6719234644432676963}
   source: {fileID: 8639421719782175403}

@@ -21,6 +21,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     [SerializeField, Range(0f, 10f), LabelText("Fire rate")] protected float fShootingRate;
     [SerializeField, Range(0f, 10f), LabelText("Reloading time")] protected float fReloadDelay;
     [SerializeField, Range(0f, 100f), LabelText("Base damage")] protected float fBaseDamage;
+    [SerializeField, Range(0f, 100f), LabelText("Armor damage")] protected float fArmorDamage;
     [SerializeField, Range(0, 120), LabelText("Maximum ammo in mag")] protected int iAmmoInWeapon;
     [SerializeField, Range(0f, 100f), LabelText("Attack distance")] protected float fAttackDistance;
     [SerializeField] private UnitType attackType;
@@ -62,6 +63,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
             Bullet _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             _bullet.Owner = team;
             _bullet.GetComponent<Bullet>().BaseDamage = fBaseDamage;
+            _bullet.GetComponent<Bullet>().ArmorDamage = fArmorDamage;
             _bullet.transform.LookAt(target.position + Vector3.up * 0.5f);
         }
     }

@@ -36,11 +36,11 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [Header("Base Unit Settings")]
     [SerializeField] private UnitType type;
     [SerializeField, Range(0f, 100f), LabelText("HP Maximum value")]   private float fMaxHp;
-    [SerializeField, Range(0f, 100f), LabelText("HP Maximum value")]   private float fMaxArmor;
+    [SerializeField, Range(0f, 100f), LabelText("Armor Maximum value")]   private float fMaxArmor;
     [SerializeField, Range(0f, 120f), LabelText("Ragdoll lifetime (sec.)")]   private float fRagdollLifetime;
     [Tooltip("Units are using NavMeshAgent and sometimes stuck walking in each other. This parameter always keeps some space between them to prevent this")]
     [SerializeField, Range(0f, 10f), LabelText("Unit Spacing")] private float fMinUnitDistance;
-    [SerializeField, Range(0, 10), LabelText("AI Weight")]    private int iWeight;
+    [SerializeField, Range(0, 10), LabelText("AI Weight")] private int iWeight;
     [Header("Team Settings")]
     [SerializeField] protected Teams team;
     [SerializeField] protected LayerMask unitLayer;

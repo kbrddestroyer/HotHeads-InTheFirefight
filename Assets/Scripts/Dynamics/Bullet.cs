@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class Bullet : MonoBehaviour
 {
     [Header("Base Bullet Settings")]
@@ -14,7 +16,6 @@ public class Bullet : MonoBehaviour
 
     private float fBaseDamage = 0f;
     private float fArmorDamage = 0f;
-    
     
     public float BaseDamage { set => fBaseDamage = value; }
     public float ArmorDamage { set => fBaseDamage = value; }
