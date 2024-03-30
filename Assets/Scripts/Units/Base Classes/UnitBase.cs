@@ -120,6 +120,8 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         set => unitLogoController = value;
     }
 
+    public UnitType Type { get => type; }
+
     public string UnitName { get => unitName; }
     #endregion
 

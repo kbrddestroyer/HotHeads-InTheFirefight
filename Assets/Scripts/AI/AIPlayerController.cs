@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AIPlayerController : PlayerController
 {
+    private Stack<UnitBase> toSpawn = new Stack<UnitBase>();
+
     public override void Awake()
     {
         base.Awake();

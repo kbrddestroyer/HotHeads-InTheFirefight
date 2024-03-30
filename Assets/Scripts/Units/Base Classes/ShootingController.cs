@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -30,6 +31,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     [SerializeField, ChildGameObjectsOnly] protected Transform bulletSpawnPoint;
     [SerializeField] protected AudioSource source;
     [SerializeField] protected Animator animator;
+    [SerializeField, AllowNull] protected ParticleSystem muzzle;
     [SerializeField, LabelText("Unit Layer")] protected LayerMask mask;
     [Header("Gizmos Settings")]
     [SerializeField, ColorUsage(false)] protected Color cGizmoColorAttackDistance = new Color(0, 0, 0, 1);
@@ -65,6 +67,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
             _bullet.GetComponent<Bullet>().BaseDamage = fBaseDamage;
             _bullet.GetComponent<Bullet>().ArmorDamage = fArmorDamage;
             _bullet.transform.LookAt(target.position + Vector3.up * 0.5f);
+            if (muzzle) muzzle.Play();
         }
     }
 
@@ -129,8 +132,8 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
         float fDistanceToClosest = 0f;
         foreach (Collider _collider in colliders)
         {
-            UnitBase unitBase = _collider.GetComponent<UnitBase>();
-            if (unitBase != null && unitBase.Team != team && unitBase.enabled)
+            UnitBase unitBase = _collider.GetComponent<UnitBase>();          
+            if (unitBase != null && unitBase.Team != team && unitBase.enabled && unitBase.Type == attackType)
             {
                 float fDistance = Vector3.Distance(transform.position, _collider.transform.position);
                 if (

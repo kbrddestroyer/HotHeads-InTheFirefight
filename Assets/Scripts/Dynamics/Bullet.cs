@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
     private float fArmorDamage = 0f;
     
     public float BaseDamage { set => fBaseDamage = value; }
-    public float ArmorDamage { set => fBaseDamage = value; }
+    public float ArmorDamage { set => fArmorDamage = value; }
 
     private float fLifetimeCurrent = 0f;
 
@@ -27,6 +27,8 @@ public class Bullet : MonoBehaviour
         IDamagable damagable = other.GetComponent<IDamagable>();
         if (damagable != null && damagable.Team != Owner)
         {
+            Debug.Log("Applying damage");
+            Debug.Log(fBaseDamage);
             if (damagable.Armor > 0)
             {
                 damagable.Armor -= fArmorDamage;
