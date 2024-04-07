@@ -10,14 +10,20 @@ Material:
   m_Name: Free_Tree
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 5
 =======
+=======
+>>>>>>> Stashed changes
   m_ValidKeywords:
   - _EMISSION
   m_InvalidKeywords: []
   m_LightmapFlags: 1
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -70,7 +76,13 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - _Glossiness: 0
+=======
+    - _GlossMapScale: 1
+    - _Glossiness: 0
+    - _GlossyReflections: 1
+>>>>>>> Stashed changes
 =======
     - _GlossMapScale: 1
     - _Glossiness: 0
@@ -81,6 +93,11 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+>>>>>>> Stashed changes
 =======
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
