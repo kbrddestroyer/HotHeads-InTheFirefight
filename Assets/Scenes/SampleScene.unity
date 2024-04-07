@@ -1318,6 +1318,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
+  controlledUnits: []
   menu: {fileID: 0}
   resourcesCount:
   - type: 0
@@ -1335,6 +1336,7 @@ MonoBehaviour:
     baseAppliance: 2
     label: {fileID: 0}
     applianceLabel: {fileID: 0}
+  enemy: []
 --- !u!1001 &1177769527
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2264,6 +2266,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1168140927083990101, guid: 99db5bea30599754ea26e364fd11be66, type: 3}
+      propertyPath: m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1168140927083990101, guid: 99db5bea30599754ea26e364fd11be66, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 87ea2079a91b3e74f84b5cb700abb4d6, type: 3}
     - target: {fileID: 1821672914823302945, guid: 99db5bea30599754ea26e364fd11be66, type: 3}
       propertyPath: m_Pivot.x
       value: 0

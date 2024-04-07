@@ -6,6 +6,8 @@ public class AIPlayerController : PlayerController
 {
     private Stack<UnitBase> toSpawn = new Stack<UnitBase>();
 
+    [SerializeField] private PlayerController[] enemy;
+
     public override void Awake()
     {
         base.Awake();

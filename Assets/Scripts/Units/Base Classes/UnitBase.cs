@@ -29,7 +29,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
      *  Global edit: 20.09.23 by kbrddestroyer: Watch git commit
      *  Global edit: 23.01.24 by kbrddestroyer: Removing all FOW-related code and migrating it to separated FOWController
      *  
-     *  REVIEW THIS PLS
+     *  
      */
 
     #region EDITOR_VARIABLES
@@ -48,7 +48,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [Header("Selection Tool")]
     [SerializeField, ChildGameObjectsOnly, AllowNull] protected GameObject selectIcon;
     [InfoBox("Replace this with something. This is incorrect way", InfoMessageType = InfoMessageType.Warning)]
-    [SerializeField, LabelText("Can be selected in-game?")] private bool bCanBeSelectedByOnScreenSelector;  // parent.hasAuthority
+    [SerializeField, LabelText("Can be selected in-game?")] private bool bCanBeSelectedByOnScreenSelector;          // parent.hasAuthority
     [Header("GUI Tools")]
     [SerializeField, AllowNull, AssetsOnly, AssetSelector] private UnitLogoController unitLogo;
     [SerializeField] private Canvas gui;
