@@ -65,6 +65,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [SerializeField] protected Animator animator;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private GameResourceStructure[] cost;
+    [SerializeField, AllowNull] private FPS_ModeController fps;
     public GameResourceStructure[] Cost { get => cost; }
 
     protected UnitLogoController unitLogoController;
@@ -208,7 +209,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     protected virtual void Update()
     {
-        if (bCanBeSelectedByOnScreenSelector && parent != null && !parent.AIControlled)
+        if (bCanBeSelectedByOnScreenSelector && parent != null && !parent.AIControlled && !fps.enabled)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -227,7 +228,12 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
             }
         }
         
-        if (agent != null && animator != null) animator.SetFloat("speed", agent.velocity.magnitude);
+        if (bSelected && !Selection.Instance.IsMulti && fps && Input.GetKeyDown(KeyCode.F))
+        {
+            fps.enabled = true;
+        }
+
+        if (agent != null && agent.enabled && animator != null) animator.SetFloat("speed", agent.velocity.magnitude);
     }
 
     private void LateUpdate()
@@ -286,7 +292,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
         animator = GetComponent<Animator>();
         mainCamera = Camera.main;
         gui = FindObjectOfType<CameraController>().MainCanvas;
-
+        fps = GetComponent<FPS_ModeController>();
         unitLayer = LayerMask.GetMask("Unit");
         groundMask = LayerMask.GetMask("Ground");
     }
