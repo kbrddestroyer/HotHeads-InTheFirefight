@@ -1,11 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Selection : MonoBehaviour
+public class Selection : MonoBehaviour, ISingleton
 {
+    private static Selection instance;
+    public static Selection Instance { get => instance; }
+
     [SerializeField, Range(0f, 40f)] private float delta;
     [SerializeField] private RectTransform selection;
     // [SerializeField] private GameObject selector;
@@ -13,7 +19,10 @@ public class Selection : MonoBehaviour
     private Camera mainCamera;
     private bool isSelection = false;
     private bool selectionEnabled = true;
+    private bool multiSelect = false;
     private Vector2 startPos, endPos;
+
+    public bool IsMulti { get => multiSelect; }
 
     private static List<ISelectable> selectables = new List<ISelectable>();
     public static void RegisterNewSelectable(ISelectable selectable)
@@ -32,6 +41,11 @@ public class Selection : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
+
+        if (instance != null)
+            throw new Exception("Not single selection manager on scene!");
+
+        instance = this;
     }
 
     // Update is called once per frame
@@ -43,6 +57,7 @@ public class Selection : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 startPos = mousePos;
+                multiSelect = false;
             }
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -80,6 +95,8 @@ public class Selection : MonoBehaviour
         Vector2 min = selection.anchoredPosition - (selection.sizeDelta / 2);
         Vector2 max = selection.anchoredPosition + (selection.sizeDelta / 2);
         
+        multiSelect = selectables.Count > 1;
+
         foreach (ISelectable _selectable in selectables)
         {
             Vector2 screenPosition = mainCamera.WorldToScreenPoint(_selectable.WorldPosition);
