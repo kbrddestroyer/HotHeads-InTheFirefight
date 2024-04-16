@@ -1,6 +1,7 @@
 # Hot Heads: In the Firefight
 
 **Hot Heads: In the Firefight** is an RTS game with FPS elements about modern military conflicts. It's made in Unity Engine using C# programming language
+
 ![poster](https://github.com/kbrddestroyer/HotHeads-InTheFirefight/assets/43577127/28922607-61a2-4a07-9e9b-7ac4c5d3bdbc)
 
 ## Tools and Software
@@ -20,4 +21,4 @@
 3. You can play Hot Heads directly from Unity Editor. It's recommended to start the game from MainScene
 
 ## Game modding
-Currently it's not possible to mod this game without any changes in source code. I'm planning to add Lua support or something like that in the future.
+Currently I'm working on XML implementation for unit settings, also I'm thinking of adding a Python/LUA scripts support 
