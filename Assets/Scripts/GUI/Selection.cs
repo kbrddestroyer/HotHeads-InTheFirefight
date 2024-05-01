@@ -94,8 +94,8 @@ public class Selection : MonoBehaviour, ISingleton
         selection.gameObject.SetActive(false);
         Vector2 min = selection.anchoredPosition - (selection.sizeDelta / 2);
         Vector2 max = selection.anchoredPosition + (selection.sizeDelta / 2);
-        
-        multiSelect = selectables.Count > 1;
+
+        uint uCount = 0;
 
         foreach (ISelectable _selectable in selectables)
         {
@@ -106,8 +106,11 @@ public class Selection : MonoBehaviour, ISingleton
                 )
             {
                 _selectable.ToggleSelection(true);
+                uCount++;
             }
             else _selectable.ToggleSelection(false);
         }
+
+        multiSelect = uCount > 1;
     }
 }

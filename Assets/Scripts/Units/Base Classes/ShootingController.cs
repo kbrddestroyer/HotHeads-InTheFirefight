@@ -42,10 +42,15 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     protected int iCurrentMagAmmo = 0;
     protected int iAmmoTotal = 0;
     protected float fTimePassed = 0f;
-
+    protected bool bFpsMode = false;
+    private bool isInReloadingState = false;
     public int AmmoTotal { get => iAmmoTotal; set => iAmmoTotal = value; }
 
     public float AttackDistance { get => fAttackDistance; }
+
+    public bool FpsMode { get => bFpsMode; set => bFpsMode = value; }
+
+    public float ShootRate { get => fShootingRate; }
     #endregion
 
     #region INTERFACES
@@ -53,26 +58,73 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
     #region ISHOOTING_IMPLEMENTED
     public virtual void Attack(Transform target, Teams team)
     {
+        if (bFpsMode) return;
+
         if (animator != null && animator.GetBool("shooting") != true)
             animator.SetBool("shooting", true);
         fTimePassed += Time.deltaTime;
         transform.LookAt(target);
         if (fTimePassed >= fShootingRate)
         {
-            source.Play();
-            fTimePassed = 0;
-            iCurrentMagAmmo--;
-            Bullet _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-            _bullet.Owner = team;
-            _bullet.GetComponent<Bullet>().BaseDamage = fBaseDamage;
-            _bullet.GetComponent<Bullet>().ArmorDamage = fArmorDamage;
+            Bullet _bullet = ShootProjectile(ref fTimePassed, team);
             _bullet.transform.LookAt(target.position + Vector3.up * 0.5f);
-            if (muzzle) muzzle.Play();
+        }
+    }
+
+    public Bullet ShootProjectile(ref float fTimePassed, Teams team)
+    {
+        // Exposed to FPS Controller
+        if (fTimePassed < fShootingRate) return null;
+        if (iAmmoTotal > 0 && iCurrentMagAmmo <= 0)
+        {
+            if (!isInReloadingState)
+                StartCoroutine(AsyncReload());
+            return null;
+        }
+        else if (iAmmoTotal <= 0) return null;
+        source.PlayOneShot(source.clip);
+        fTimePassed = 0f;
+        iCurrentMagAmmo--;
+        Bullet _bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        _bullet.Owner = team;
+        _bullet.GetComponent<Bullet>().BaseDamage = fBaseDamage;
+        _bullet.GetComponent<Bullet>().ArmorDamage = fArmorDamage;
+
+        if (muzzle) muzzle.Play(muzzle);
+
+        return _bullet;
+    }
+
+    private IEnumerator AsyncReload()
+    {
+        isInReloadingState = true;
+        if (animator && !animator.GetBool("reload")) animator.SetBool("reload", true);
+        yield return new WaitForSeconds(fReloadDelay);
+        iCurrentMagAmmo = Mathf.Clamp(iAmmoTotal, 0, iAmmoInWeapon);
+        iAmmoTotal -= iCurrentMagAmmo;
+        if (animator) animator.SetBool("reload", false);
+        isInReloadingState = false;
+    }
+
+    private void Reload()
+    {
+        isInReloadingState = true;
+        if (animator && !animator.GetBool("reload")) animator.SetBool("reload", true);
+        fTimePassed += Time.deltaTime;
+        if (fTimePassed >= fReloadDelay)
+        {
+            fTimePassed = 0;
+
+            iCurrentMagAmmo = Mathf.Clamp(iAmmoTotal, 0, iAmmoInWeapon);
+            iAmmoTotal -= iCurrentMagAmmo;
+            if (animator) animator.SetBool("reload", false);
+            isInReloadingState = false;
         }
     }
 
     public virtual void ShootingBaseLogic(Teams team)
     {
+        if (bFpsMode) return;
         if (iCurrentMagAmmo > 0)
         {
             Transform closestEnemy = FindClosest(team);
@@ -89,16 +141,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
         }
         else if (iAmmoTotal > 0)
         {
-            if (animator && !animator.GetBool("reload")) animator.SetBool("reload", true);
-            fTimePassed += Time.deltaTime;
-            if (fTimePassed >= fReloadDelay)
-            {
-                fTimePassed = 0;
-
-                iCurrentMagAmmo = Mathf.Clamp(iAmmoTotal, 0, iAmmoInWeapon);
-                iAmmoTotal -= iCurrentMagAmmo;
-                if (animator) animator.SetBool("reload", false);
-            }
+            Reload();
         }
         else
         {
@@ -123,6 +166,7 @@ public class ShootingController : MonoBehaviour, IShooting, IUnit
          *      thst updates w/ spawning new unit in it's Start/Awake method
          *      Cycle for each unit in enemy list and check if 
          */
+        if (bFpsMode) return null;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, fAttackDistance, mask);
 
