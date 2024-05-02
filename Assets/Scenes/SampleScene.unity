@@ -705,43 +705,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &376032790 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6343345109193328207, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-  m_PrefabInstance: {fileID: 1588112596}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f56d9ef5bda0b22488b9365a0923a20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &376032791 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5378460418780771582, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-  m_PrefabInstance: {fileID: 1588112596}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bacb8f051975bf0478f7588322c4c60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!54 &376032792 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 1051467268177557131, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-  m_PrefabInstance: {fileID: 1588112596}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &376032793 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 2377591240777693333, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-  m_PrefabInstance: {fileID: 1588112596}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &376032795 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7622254825458093088, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-  m_PrefabInstance: {fileID: 1588112596}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &418794775 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6429724665181651522, guid: 28403558a81298b40834b6ab700e857a, type: 3}
@@ -2153,18 +2116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1567921279, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1567921281, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1051467268177557131, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     - target: {fileID: 5378460418780771582, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
       propertyPath: parent
       value: 
@@ -2218,41 +2169,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 376032792}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 376032795}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: collider
-      value: 
-      objectReference: {fileID: 376032793}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: mouseSens
-      value: 1.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: walkSpeed
-      value: 6.24
-      objectReference: {fileID: 0}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
       propertyPath: globalCamera
       value: 
       objectReference: {fileID: 1794577992}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: unitController
-      value: 
-      objectReference: {fileID: 376032791}
-    - target: {fileID: 8497225532571067119, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-      propertyPath: shootingController
-      value: 
-      objectReference: {fileID: 376032790}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
 --- !u!1001 &1609959043
@@ -2738,19 +2657,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2811486772663819472, guid: 4fd7da498f4f0f1458c9c6604bfdd2bc, type: 3}
   m_PrefabInstance: {fileID: 1882279090}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1947312247 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1567921279, guid: a43c154a284f3eb4d93292ffe754dbc3, type: 3}
-  m_PrefabInstance: {fileID: 1588112596}
-  m_PrefabAsset: {fileID: 0}
---- !u!81 &1947312251
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947312247}
-  m_Enabled: 1
 --- !u!1001 &2004164106
 PrefabInstance:
   m_ObjectHideFlags: 0

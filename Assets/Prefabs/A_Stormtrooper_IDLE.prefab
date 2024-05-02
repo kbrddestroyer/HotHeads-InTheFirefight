@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 1567921283}
   - component: {fileID: 1567921280}
   - component: {fileID: 1567921281}
+  - component: {fileID: 1947312251}
   m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1567921283
 Transform:
   m_ObjectHideFlags: 0
@@ -109,6 +110,14 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!81 &1947312251
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567921279}
+  m_Enabled: 1
 --- !u!1 &151504341068979923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1877,7 +1886,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &5378460418780771582
 MonoBehaviour:
@@ -2015,17 +2024,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7357651463745907195}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e03d4883ac90384391235efd5967f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSens: 0
+  mouseSens: 1.73
+  walkSpeed: 6.24
   localCamera: {fileID: 1567921280}
   globalCamera: {fileID: 0}
   root: {fileID: 6465462458799726629}
   agent: {fileID: 4936760076714445233}
-  unitController: {fileID: 0}
+  aiUnitController: {fileID: 0}
+  unitController: {fileID: 5378460418780771582}
+  shootingController: {fileID: 6343345109193328207}
+  animator: {fileID: 7622254825458093088}
+  collider: {fileID: 2377591240777693333}
+  rb: {fileID: 1051467268177557131}
 --- !u!1 &7368954468816463436
 GameObject:
   m_ObjectHideFlags: 0
