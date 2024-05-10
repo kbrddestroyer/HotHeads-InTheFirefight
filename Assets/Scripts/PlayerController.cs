@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
         get => isControllerByAI;
     }
 
+    public List<UnitBase> ControlledUnits { get => controlledUnits; }
+
     public bool Local { get => localPlayer; }
 
     [SerializeField] protected GameResourceStructure[] resourcesCount;
@@ -78,12 +80,12 @@ public class PlayerController : MonoBehaviour
         SpawnSelectedUnit(unit);
     }
 
-    protected void SpawnSelectedUnit(UnitBase unitPrefab)
+    protected bool SpawnSelectedUnit(UnitBase unitPrefab)
     {
         foreach (GameResourceStructure resource in unitPrefab.Cost)
         {
             if (resource.Amount > getResource(resource.Type).Amount)
-                return;
+                return false;
         }
         unitPrefab.Parent = this;
         UnitBase unit = Instantiate(unitPrefab, transform.position, transform.rotation);
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             getResource(resource.Type).Amount -= resource.Amount;
         }
+        return true;
     }
 
     public virtual void Awake()

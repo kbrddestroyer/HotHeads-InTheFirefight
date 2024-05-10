@@ -47,8 +47,13 @@ MonoBehaviour:
   allUnits: {fileID: 11400000, guid: 92c9d9e4e2718a94f8a737067195ceb0, type: 2}
   team: 0
   isControllerByAI: 0
+  localPlayer: 1
   deltaTime: 1
   explosion: {fileID: 8755994347345367945, guid: 49628dc49b8e38740a8dc1831dcd1fde, type: 3}
+  ground:
+    serializedVersion: 2
+    m_Bits: 64
+  controlledUnits: []
   menu: {fileID: 0}
   resourcesCount:
   - type: 0

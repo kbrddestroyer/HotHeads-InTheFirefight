@@ -1,17 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class AIPlayerController : PlayerController
 {
     private Stack<UnitBase> toSpawn = new Stack<UnitBase>();
+    [SerializeField] private bool testMyself;
+    [SerializeField] private PlayerController[] enemies;
 
-    [SerializeField] private PlayerController[] enemy;
+    private int selectedID = 0;
 
     public override void Awake()
     {
         base.Awake();
         isControllerByAI = true;
+    }
+
+    private UnitBase getUnitBase()
+    {
+        // TODO: Finish algo
+
+        float totalPower = 0f;
+        foreach (PlayerController enemy in enemies) 
+            foreach (UnitBase unit in enemy.ControlledUnits)
+            {
+                totalPower += (unit.Armor + unit.HP) * unit.Weight;
+            }
+
+        foreach (UnitBase unit in ControlledUnits)
+        {
+            totalPower -= (unit.Armor + unit.HP) * unit.Weight;
+        }
+
+        foreach (UnitStructureInformation unit in units)
+        {
+            if (unit.team == team)
+            {
+                // Get resource delta
+            }
+        }
+
+        return null;
     }
 
     public override void Update()
@@ -26,12 +56,11 @@ public class AIPlayerController : PlayerController
                 _res.Amount += _res.Appliance;
             }
         }
-
-        GameResourceStructure manpwr = getResource(GameResources.MANPOWER);
-        if (manpwr.Amount >= 30)
-        {
-            SpawnSelectedUnit(units[0].unit);
-            manpwr.Amount -= 30;
+        if (testMyself) {
+            if (SpawnSelectedUnit(units[selectedID].unit))
+            {
+                selectedID = Random.Range(0, units.Count);
+            }
         }
     }
 }
