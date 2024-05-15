@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,6 +23,9 @@ public class FPS_ModeController : MonoBehaviour
     [SerializeField, AllowNull] private Animator animator;
     [SerializeField] private new Collider collider;
     [SerializeField] private Rigidbody rb;
+
+    [SerializeField] private Canvas rtsHUD;
+    [SerializeField] private Canvas fpsHUD;
 
     private float fTimePassed = 0f;
     private Quaternion initialRotation;
