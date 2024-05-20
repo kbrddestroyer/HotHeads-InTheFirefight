@@ -22,3 +22,7 @@
 
 ## Game modding
 Currently I'm working on XML implementation for unit settings, also I'm thinking of adding a Python/LUA scripts support 
+
+## Contributors:
+- Keyboard Destroyer: developer, 3d graphics, level design, game design
+- soloist: 3d animation, level design
