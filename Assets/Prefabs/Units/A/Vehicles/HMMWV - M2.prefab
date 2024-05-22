@@ -226,6 +226,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cost: []
+  fps: {fileID: 0}
+  explode: {fileID: 8755994347345367945, guid: 49628dc49b8e38740a8dc1831dcd1fde, type: 3}
   supplyDelay: 1
   supplyRange: 6.5
   supplyAmount: 3

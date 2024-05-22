@@ -37,7 +37,18 @@ public abstract class ShootingUnitBase : UnitBase, IUnit, ISelectable, IDamagabl
         foreach (ShootingController controller in controllers)
             controller.ShootingBaseLogic(team);
     }
-    
+
+    public override void OnDeath()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        
+        if (rb)
+            rb.isKinematic = true;
+        col.enabled = false;
+        if (animator) animator.enabled = false;
+        selectIcon.SetActive(false);
+    }
+
     #region UNIT_BASE_EXTENDED
 
     protected override void Update()

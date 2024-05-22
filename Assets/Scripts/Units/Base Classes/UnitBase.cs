@@ -51,7 +51,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [SerializeField, LabelText("Can be selected in-game?")] private bool bCanBeSelectedByOnScreenSelector;          // parent.hasAuthority
     [Header("GUI Tools")]
     [SerializeField, AllowNull, AssetsOnly, AssetSelector] private UnitLogoController unitLogo;
-    [SerializeField] private Canvas gui;
+    [SerializeField] protected Canvas gui;
     [SerializeField] private string unitName;
     [SerializeField] private Color minDistanceColor = new Color(0, 0, 0, 1f);
     #endregion
