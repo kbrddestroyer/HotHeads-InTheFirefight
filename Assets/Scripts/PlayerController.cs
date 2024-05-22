@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0f, 10f)] protected float deltaTime;
     [SerializeField] protected GameObject explosion;
     [SerializeField] private LayerMask ground;
-
+    [SerializeField] private List<UnitBase> controlledUnits;
     [SerializeField, AllowNull] protected TMP_Dropdown menu;
 
     private Firepower firepower;
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         unitPrefab.Parent = this;
         UnitBase unit = Instantiate(unitPrefab, transform.position, transform.rotation);
         unit.Parent = this;
-
+        controlledUnits.Add(unit);
         foreach (GameResourceStructure resource in unitPrefab.Cost)
         {
             getResource(resource.Type).Amount -= resource.Amount;
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     public virtual void Awake()
     {
-        units = allUnits.Units.ToList<UnitStructureInformation>();
+        units = allUnits.Units.ToList();
         units.RemoveAll(u => u.team != Team);      
 
         // WARNING

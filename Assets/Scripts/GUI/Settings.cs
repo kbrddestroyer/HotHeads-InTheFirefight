@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Audio;
+
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+    private static Settings instance;
+    public static Settings Instance { get => instance; }
+
     [SerializeField] private Slider master;
     [SerializeField] private Slider music;
     [SerializeField] private Slider sfx;
+
     [SerializeField] private AudioMixer mixer;
 
     private const string masterKey = "masterVolume";
