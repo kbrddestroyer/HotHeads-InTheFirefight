@@ -1553,14 +1553,15 @@ MonoBehaviour:
   fShootingRate: 2
   fReloadDelay: 2
   fBaseDamage: 100
-  fArmorDamage: 1
+  fArmorDamage: 10
   iAmmoInWeapon: 3
   fAttackDistance: 10
   attackType: 1
-  bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
+  bulletPrefab: {fileID: -6458894409601254304, guid: 59da76411390330468017bbc43f361b7, type: 3}
   bulletSpawnPoint: {fileID: 1612233822840404551}
   source: {fileID: 3196132045311118714}
   animator: {fileID: 3478343066703887013}
+  muzzle: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 128
@@ -1607,6 +1608,7 @@ MonoBehaviour:
     baseAppliance: 0
     label: {fileID: 0}
     applianceLabel: {fileID: 0}
+  fps: {fileID: 0}
   controllers:
   - {fileID: 5962034126331031110}
   ragdollActivators:

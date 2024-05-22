@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1ea215250b1c44fb73e35c111a5208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   fMaxHp: 1
   fMaxArmor: 3
   fRagdollLifetime: 5
@@ -2126,9 +2126,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cost: []
+  fps: {fileID: 0}
   controllers:
   - {fileID: 7180327337475378770}
   - {fileID: 4806574588133276596}
+  explode: {fileID: 8755994347345367945, guid: 49628dc49b8e38740a8dc1831dcd1fde, type: 3}
 --- !u!114 &7180327337475378770
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,9 +16,6 @@ public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IR
     // IRagdoll implemented
     public void Switch(bool bSwitch)
     {
-        GetComponent<Rigidbody>().isKinematic = bSwitch;
-        col.enabled = !bSwitch;
-        if (animator) animator.enabled = !bSwitch;
         foreach (RagdollActivator activator in ragdollActivators)
         {
             activator.Switch(bSwitch);
@@ -28,6 +25,7 @@ public class InfantryBase : ShootingUnitBase, IUnit, ISelectable, IDamagable, IR
     // UnitBase implemented
     public override void OnDeath()
     {
+        base.OnDeath();
         Switch(true);
     }
 

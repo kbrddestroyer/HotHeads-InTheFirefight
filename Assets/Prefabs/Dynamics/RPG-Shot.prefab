@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2747791736395368250}
   - component: {fileID: 128046166927045616}
   - component: {fileID: 3082128426326044359}
-  - component: {fileID: 8320788017569106652}
+  - component: {fileID: -6458894409601254304}
   - component: {fileID: 3297149720263725836}
   m_Layer: 0
   m_Name: RPG-Shot
@@ -103,7 +103,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &8320788017569106652
+--- !u!114 &-6458894409601254304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,11 +112,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1929252851778245157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f37d909ff3b0b3428b40e9a0c604c4c, type: 3}
+  m_Script: {fileID: 11500000, guid: 4eb0cd57e29648d4ab3773b185664d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fSpeed: 10
   fLifetime: 5
+  impactFX: {fileID: 5419888681087466224, guid: f90e987d0b2c2ac47b208dec3af944c4, type: 3}
 --- !u!136 &3297149720263725836
 CapsuleCollider:
   m_ObjectHideFlags: 0
