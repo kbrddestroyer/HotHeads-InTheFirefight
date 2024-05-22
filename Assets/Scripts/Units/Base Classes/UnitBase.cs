@@ -65,7 +65,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
     [SerializeField] protected Animator animator;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private GameResourceStructure[] cost;
-    [SerializeField, AllowNull] private FPS_ModeController fps;
+    [SerializeField, AllowNull] protected FPS_ModeController fps;
     public GameResourceStructure[] Cost { get => cost; }
 
     protected UnitLogoController unitLogoController;
@@ -209,7 +209,7 @@ public abstract class UnitBase : MonoBehaviour, IUnit, ISelectable, IDamagable
 
     protected virtual void Update()
     {
-        if (bCanBeSelectedByOnScreenSelector && parent != null && !parent.AIControlled && !fps.enabled)
+        if (bCanBeSelectedByOnScreenSelector && parent != null && !parent.AIControlled && (fps == null || !fps.enabled))
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {

@@ -9,7 +9,6 @@ public class Bullet : MonoBehaviour
     [Header("Base Bullet Settings")]
     [SerializeField, Range(0f, 100f)] private float fSpeed;
     [SerializeField, Range(0f, 10f)] private float fLifetime;
-    
 
     private Teams ownerTeam;
     public Teams Owner { get => ownerTeam; set => ownerTeam = value; }
@@ -22,7 +21,7 @@ public class Bullet : MonoBehaviour
 
     private float fLifetimeCurrent = 0f;
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         IDamagable damagable = other.GetComponent<IDamagable>();
         if (damagable != null && damagable.Team != Owner)

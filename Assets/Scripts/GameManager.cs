@@ -6,11 +6,11 @@ public class GameManager : MonoBehaviour
 {
     // Sigleton object
 
-    [SerializeField] private PlayerController localPlayerController;
-    [SerializeField, Range(0f, 1000f)] private float winpointsRequired;
+    [SerializeField] protected PlayerController localPlayerController;
+    [SerializeField, Range(0f, 1000f)] protected float winpointsRequired;
 
-    [SerializeField] private GameObject winState;
-    [SerializeField] private GameObject looseState;
+    [SerializeField] protected GameObject winState;
+    [SerializeField] protected GameObject looseState;
 
     private static PointOfInterest[] poiList;
     public static PointOfInterest[] POI { get => poiList; }

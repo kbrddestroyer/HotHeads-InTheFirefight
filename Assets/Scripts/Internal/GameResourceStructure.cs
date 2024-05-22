@@ -7,11 +7,11 @@ using UnityEngine;
 [System.Serializable]
 public class GameResourceStructure
 {
-    [SerializeField] private GameResources type;
-    [SerializeField] private float amount;
+    [SerializeField] protected GameResources type;
+    [SerializeField] protected float amount;
     [SerializeField, Range(0f, 10f)] public float baseAppliance;
 
-    private float appliance;
+    protected float appliance;
 
     [SerializeField, AllowNull] private TMP_Text label;
     [SerializeField, AllowNull] private TMP_Text applianceLabel;
