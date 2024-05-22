@@ -1130,7 +1130,7 @@ MonoBehaviour:
   fArmorDamage: 0
   iAmmoInWeapon: 30
   fAttackDistance: 7
-  attackType: 2
+  attackType: 0
   bulletPrefab: {fileID: 5898887494657220768, guid: 868fa0d1992d60041a1f3cb23103073e, type: 3}
   bulletSpawnPoint: {fileID: 6040506667291702249}
   source: {fileID: 2662779829673669449}

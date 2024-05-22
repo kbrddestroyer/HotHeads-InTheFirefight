@@ -115,9 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb0cd57e29648d4ab3773b185664d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fSpeed: 0
-  fLifetime: 0
-  impactFX: {fileID: 0}
+  fSpeed: 10
+  fLifetime: 5
+  impactFX: {fileID: 5419888681087466224, guid: f90e987d0b2c2ac47b208dec3af944c4, type: 3}
 --- !u!136 &3297149720263725836
 CapsuleCollider:
   m_ObjectHideFlags: 0
